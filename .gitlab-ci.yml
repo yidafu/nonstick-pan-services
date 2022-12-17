@@ -1,0 +1,14 @@
+image: maven:3-eclipse-temurin-19
+
+stages:
+  - test
+
+default:
+  interruptible: false
+  before_script:
+    - cp ./settings.xml /root/.m2/settings.xml
+
+component_maven_test:
+  stage: test
+  script:
+    - cd component-service && mvn test
