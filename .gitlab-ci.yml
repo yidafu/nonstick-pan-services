@@ -1,0 +1,14 @@
+image: maven:3-openjdk-18
+
+stages:
+  - test
+
+default:
+  interruptible: false
+  before_script:
+    - cp ./settings.xml $MAVEN_CONFIG/settings.xml
+
+component_maven_test:
+  stage: test
+  script:
+    - cd component-service && mvn test
