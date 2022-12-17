@@ -6,6 +6,8 @@ stages:
 default:
   interruptible: false
   before_script:
+    - ls /usr/share/maven/ref
+    - echo $MAVEN_CONFIG
     - cp ./settings.xml $MAVEN_CONFIG/settings.xml
 
 component_maven_test:
