@@ -1,0 +1,110 @@
+2022-12-17 18:02:26.177 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster BUILTIN_CLUSTER, service null has been made ready
+2022-12-17 18:02:26.177 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_DISCOVER_CLUSTER, service null has been made ready
+2022-12-17 18:02:26.177 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_CONFIG_CLUSTER, service null has been made ready
+2022-12-17 18:02:26.177 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster HEALTH_CHECK_CLUSTER, service null has been made ready
+2022-12-17 18:02:26.180 INFO [restartedMain:c.t.p.p.r.m.InMemoryRegistry] start to load local cache files from ./polaris/backup
+2022-12-17 18:02:26.185 INFO [restartedMain:c.t.p.p.r.m.InMemoryRegistry] loaded 0 services from local cache
+2022-12-17 18:02:26.228 INFO [restartedMain:o.s.b.d.a.OptionalLiveReloadServer] LiveReload server is running on port 35729
+2022-12-17 18:02:26.242 INFO [restartedMain:o.s.b.w.e.t.TomcatWebServer] Tomcat started on port(s): 8201 (http) with context path ''
+2022-12-17 18:02:26.489 INFO [restartedMain:c.t.p.d.c.a.DefaultProviderAPI] register default/PanComponentService instance 342fee2a7560977698dac26083b61d92dd761250 succ
+2022-12-17 18:02:26.491 INFO [restartedMain:c.p.b.d.r.a.PolarisDiscoveryAutoRegister] [Polaris] success to register instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:02:26.492 INFO [restartedMain:c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:02:26.497 INFO [restartedMain:d.y.p.c.NonstickPanComponentApplication] Started NonstickPanComponentApplication in 1.265 seconds (JVM running for 1.495)
+2022-12-17 18:02:35.283 INFO [SpringContextShutdownHook:c.t.p.d.c.a.DefaultProviderAPI] deregister instance InstanceDeregisterRequest{request=CommonProviderRequest{instanceID='null', namespace='default', service='PanComponentService', token='null', host='127.0.0.1', port=8201, version='null', protocol='null', weight=null, priority=null, metadata=null, ttl=null, targetServer=com.tencent.polaris.api.plugin.server.TargetServer@5dccae88}} succ
+2022-12-17 18:02:35.284 INFO [SpringContextShutdownHook:c.p.b.d.r.a.PolarisDiscoveryAutoDeregister] [Polaris] success to deregister instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:02:35.284 INFO [SpringContextShutdownHook:c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to remove schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:02:35.291 INFO [SpringContextShutdownHook:c.t.p.p.r.n.NearbyRouter] reportClientExecutor has been stopped
+2022-12-17 18:02:35.291 INFO [SpringContextShutdownHook:c.t.p.p.c.g.GrpcConnector] start to destroy connector grpc
+2022-12-17 18:02:35.295 INFO [SpringContextShutdownHook:o.s.s.c.ThreadPoolTaskExecutor] Shutting down ExecutorService 'applicationTaskExecutor'
+2022-12-17 18:03:17.461 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster BUILTIN_CLUSTER, service null has been made ready
+2022-12-17 18:03:17.462 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_DISCOVER_CLUSTER, service null has been made ready
+2022-12-17 18:03:17.462 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_CONFIG_CLUSTER, service null has been made ready
+2022-12-17 18:03:17.462 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster HEALTH_CHECK_CLUSTER, service null has been made ready
+2022-12-17 18:03:17.465 INFO [restartedMain:c.t.p.p.r.m.InMemoryRegistry] start to load local cache files from ./polaris/backup
+2022-12-17 18:03:17.470 INFO [restartedMain:c.t.p.p.r.m.InMemoryRegistry] loaded 0 services from local cache
+2022-12-17 18:03:17.518 INFO [restartedMain:o.s.b.d.a.OptionalLiveReloadServer] LiveReload server is running on port 35729
+2022-12-17 18:03:17.538 INFO [restartedMain:o.s.b.w.e.t.TomcatWebServer] Tomcat started on port(s): 8201 (http) with context path ''
+2022-12-17 18:03:17.786 INFO [restartedMain:c.t.p.d.c.a.DefaultProviderAPI] register default/PanComponentService instance 342fee2a7560977698dac26083b61d92dd761250 succ
+2022-12-17 18:03:17.788 INFO [restartedMain:c.p.b.d.r.a.PolarisDiscoveryAutoRegister] [Polaris] success to register instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:03:17.789 INFO [restartedMain:c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:03:17.796 INFO [restartedMain:d.y.p.c.NonstickPanComponentApplication] Started NonstickPanComponentApplication in 1.33 seconds (JVM running for 1.564)
+2022-12-17 18:03:37.973 INFO [SpringContextShutdownHook:c.t.p.d.c.a.DefaultProviderAPI] deregister instance InstanceDeregisterRequest{request=CommonProviderRequest{instanceID='null', namespace='default', service='PanComponentService', token='null', host='127.0.0.1', port=8201, version='null', protocol='null', weight=null, priority=null, metadata=null, ttl=null, targetServer=com.tencent.polaris.api.plugin.server.TargetServer@504273cb}} succ
+2022-12-17 18:03:37.973 INFO [SpringContextShutdownHook:c.p.b.d.r.a.PolarisDiscoveryAutoDeregister] [Polaris] success to deregister instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:03:37.973 INFO [SpringContextShutdownHook:c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to remove schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:03:37.980 INFO [SpringContextShutdownHook:c.t.p.p.r.n.NearbyRouter] reportClientExecutor has been stopped
+2022-12-17 18:03:37.980 INFO [SpringContextShutdownHook:c.t.p.p.c.g.GrpcConnector] start to destroy connector grpc
+2022-12-17 18:03:37.984 INFO [SpringContextShutdownHook:o.s.s.c.ThreadPoolTaskExecutor] Shutting down ExecutorService 'applicationTaskExecutor'
+2022-12-17 18:06:00.933 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster BUILTIN_CLUSTER, service null has been made ready
+2022-12-17 18:06:00.933 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_DISCOVER_CLUSTER, service null has been made ready
+2022-12-17 18:06:00.933 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_CONFIG_CLUSTER, service null has been made ready
+2022-12-17 18:06:00.933 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster HEALTH_CHECK_CLUSTER, service null has been made ready
+2022-12-17 18:06:00.936 INFO [restartedMain:c.t.p.p.r.m.InMemoryRegistry] start to load local cache files from ./polaris/backup
+2022-12-17 18:06:00.942 INFO [restartedMain:c.t.p.p.r.m.InMemoryRegistry] loaded 0 services from local cache
+2022-12-17 18:06:01.001 INFO [restartedMain:o.s.b.d.a.OptionalLiveReloadServer] LiveReload server is running on port 35729
+2022-12-17 18:06:01.019 INFO [restartedMain:o.s.b.w.e.t.TomcatWebServer] Tomcat started on port(s): 8201 (http) with context path ''
+2022-12-17 18:06:01.280 INFO [restartedMain:c.t.p.d.c.a.DefaultProviderAPI] register default/PanComponentService instance 342fee2a7560977698dac26083b61d92dd761250 succ
+2022-12-17 18:06:01.282 INFO [restartedMain:c.p.b.d.r.a.PolarisDiscoveryAutoRegister] [Polaris] success to register instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:06:01.282 INFO [restartedMain:c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:06:01.289 INFO [restartedMain:d.y.p.c.NonstickPanComponentApplication] Started NonstickPanComponentApplication in 1.397 seconds (JVM running for 1.63)
+2022-12-17 18:06:31.481 INFO [SpringContextShutdownHook:c.t.p.d.c.a.DefaultProviderAPI] deregister instance InstanceDeregisterRequest{request=CommonProviderRequest{instanceID='null', namespace='default', service='PanComponentService', token='null', host='127.0.0.1', port=8201, version='null', protocol='null', weight=null, priority=null, metadata=null, ttl=null, targetServer=com.tencent.polaris.api.plugin.server.TargetServer@1d6f0b2}} succ
+2022-12-17 18:06:31.482 INFO [SpringContextShutdownHook:c.p.b.d.r.a.PolarisDiscoveryAutoDeregister] [Polaris] success to deregister instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:06:31.482 INFO [SpringContextShutdownHook:c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to remove schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:06:31.489 INFO [SpringContextShutdownHook:c.t.p.p.r.n.NearbyRouter] reportClientExecutor has been stopped
+2022-12-17 18:06:31.489 INFO [SpringContextShutdownHook:c.t.p.p.c.g.GrpcConnector] start to destroy connector grpc
+2022-12-17 18:06:31.494 INFO [SpringContextShutdownHook:o.s.s.c.ThreadPoolTaskExecutor] Shutting down ExecutorService 'applicationTaskExecutor'
+2022-12-17 18:18:04.046 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster BUILTIN_CLUSTER, service null has been made ready
+2022-12-17 18:18:04.047 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_DISCOVER_CLUSTER, service null has been made ready
+2022-12-17 18:18:04.047 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_CONFIG_CLUSTER, service null has been made ready
+2022-12-17 18:18:04.047 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster HEALTH_CHECK_CLUSTER, service null has been made ready
+2022-12-17 18:18:04.051 INFO [restartedMain:c.t.p.p.r.m.InMemoryRegistry] start to load local cache files from ./polaris/backup
+2022-12-17 18:18:04.060 INFO [restartedMain:c.t.p.p.r.m.InMemoryRegistry] loaded 0 services from local cache
+2022-12-17 18:18:04.113 INFO [restartedMain:o.s.b.d.a.OptionalLiveReloadServer] LiveReload server is running on port 35729
+2022-12-17 18:18:04.130 INFO [restartedMain:o.s.b.w.e.t.TomcatWebServer] Tomcat started on port(s): 8201 (http) with context path ''
+2022-12-17 18:18:04.372 INFO [restartedMain:c.t.p.d.c.a.DefaultProviderAPI] register default/PanComponentService instance 342fee2a7560977698dac26083b61d92dd761250 succ
+2022-12-17 18:18:04.374 INFO [restartedMain:c.p.b.d.r.a.PolarisDiscoveryAutoRegister] [Polaris] success to register instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:18:04.374 INFO [restartedMain:c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:18:04.379 INFO [restartedMain:d.y.p.c.NonstickPanComponentApplication] Started NonstickPanComponentApplication in 1.476 seconds (JVM running for 1.792)
+2022-12-17 18:19:03.758 INFO [Thread-9:c.t.p.d.c.a.DefaultProviderAPI] deregister instance InstanceDeregisterRequest{request=CommonProviderRequest{instanceID='null', namespace='default', service='PanComponentService', token='null', host='127.0.0.1', port=8201, version='null', protocol='null', weight=null, priority=null, metadata=null, ttl=null, targetServer=com.tencent.polaris.api.plugin.server.TargetServer@5bb85090}} succ
+2022-12-17 18:19:03.758 INFO [Thread-9:c.p.b.d.r.a.PolarisDiscoveryAutoDeregister] [Polaris] success to deregister instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:19:03.759 INFO [Thread-9:c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to remove schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:19:03.775 INFO [Thread-9:c.t.p.p.r.n.NearbyRouter] reportClientExecutor has been stopped
+2022-12-17 18:19:03.776 INFO [Thread-9:c.t.p.p.c.g.GrpcConnector] start to destroy connector grpc
+2022-12-17 18:19:03.780 INFO [Thread-9:o.s.s.c.ThreadPoolTaskExecutor] Shutting down ExecutorService 'applicationTaskExecutor'
+2022-12-17 18:19:40.661 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster BUILTIN_CLUSTER, service null has been made ready
+2022-12-17 18:19:40.662 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_DISCOVER_CLUSTER, service null has been made ready
+2022-12-17 18:19:40.662 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_CONFIG_CLUSTER, service null has been made ready
+2022-12-17 18:19:40.662 INFO [restartedMain:c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster HEALTH_CHECK_CLUSTER, service null has been made ready
+2022-12-17 18:19:40.665 INFO [restartedMain:c.t.p.p.r.m.InMemoryRegistry] start to load local cache files from ./polaris/backup
+2022-12-17 18:19:40.671 INFO [restartedMain:c.t.p.p.r.m.InMemoryRegistry] loaded 0 services from local cache
+2022-12-17 18:19:40.721 INFO [restartedMain:o.s.b.d.a.OptionalLiveReloadServer] LiveReload server is running on port 35729
+2022-12-17 18:19:40.735 INFO [restartedMain:o.s.b.w.e.t.TomcatWebServer] Tomcat started on port(s): 8201 (http) with context path ''
+2022-12-17 18:19:40.980 INFO [restartedMain:c.t.p.d.c.a.DefaultProviderAPI] register default/PanComponentService instance 342fee2a7560977698dac26083b61d92dd761250 succ
+2022-12-17 18:19:40.982 INFO [restartedMain:c.p.b.d.r.a.PolarisDiscoveryAutoRegister] [Polaris] success to register instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:19:40.983 INFO [restartedMain:c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:19:40.988 INFO [restartedMain:d.y.p.c.NonstickPanComponentApplication] Started NonstickPanComponentApplication in 1.377 seconds (JVM running for 1.621)
+2022-12-17 18:20:03.247 INFO [Thread-9:c.t.p.d.c.a.DefaultProviderAPI] deregister instance InstanceDeregisterRequest{request=CommonProviderRequest{instanceID='null', namespace='default', service='PanComponentService', token='null', host='127.0.0.1', port=8201, version='null', protocol='null', weight=null, priority=null, metadata=null, ttl=null, targetServer=com.tencent.polaris.api.plugin.server.TargetServer@1d3d3e68}} succ
+2022-12-17 18:20:03.248 INFO [Thread-9:c.p.b.d.r.a.PolarisDiscoveryAutoDeregister] [Polaris] success to deregister instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:20:03.248 INFO [Thread-9:c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to remove schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:20:03.265 INFO [Thread-9:c.t.p.p.r.n.NearbyRouter] reportClientExecutor has been stopped
+2022-12-17 18:20:03.265 INFO [Thread-9:c.t.p.p.c.g.GrpcConnector] start to destroy connector grpc
+2022-12-17 18:20:03.270 INFO [Thread-9:o.s.s.c.ThreadPoolTaskExecutor] Shutting down ExecutorService 'applicationTaskExecutor'
+2022-12-17 18:25:58.457 INFO [main :c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster BUILTIN_CLUSTER, service null has been made ready
+2022-12-17 18:25:58.457 INFO [main :c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_DISCOVER_CLUSTER, service null has been made ready
+2022-12-17 18:25:58.457 INFO [main :c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster SERVICE_CONFIG_CLUSTER, service null has been made ready
+2022-12-17 18:25:58.457 INFO [main :c.t.p.p.c.g.ConnectionManager] [ServerConnector]cluster HEALTH_CHECK_CLUSTER, service null has been made ready
+2022-12-17 18:25:58.460 INFO [main :c.t.p.p.r.m.InMemoryRegistry] start to load local cache files from ./polaris/backup
+2022-12-17 18:25:58.465 INFO [main :c.t.p.p.r.m.InMemoryRegistry] loaded 0 services from local cache
+2022-12-17 18:25:58.519 INFO [main :o.s.b.w.e.t.TomcatWebServer] Tomcat started on port(s): 8201 (http) with context path ''
+2022-12-17 18:25:58.778 INFO [main :c.t.p.d.c.a.DefaultProviderAPI] register default/PanComponentService instance 342fee2a7560977698dac26083b61d92dd761250 succ
+2022-12-17 18:25:58.781 INFO [main :c.p.b.d.r.a.PolarisDiscoveryAutoRegister] [Polaris] success to register instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:25:58.782 INFO [main :c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:25:58.787 INFO [main :d.y.p.c.NonstickPanComponentApplication] Started NonstickPanComponentApplication in 1.412 seconds (JVM running for 1.625)
+2022-12-17 18:26:07.285 INFO [http-nio-8201-exec-1:o.a.c.c.C.[.[.[/]] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-17 18:26:07.285 INFO [http-nio-8201-exec-1:o.s.w.s.DispatcherServlet] Initializing Servlet 'dispatcherServlet'
+2022-12-17 18:26:07.286 INFO [http-nio-8201-exec-1:o.s.w.s.DispatcherServlet] Completed initialization in 1 ms
+2022-12-17 18:26:48.495 INFO [SpringContextShutdownHook:c.t.p.d.c.a.DefaultProviderAPI] deregister instance InstanceDeregisterRequest{request=CommonProviderRequest{instanceID='null', namespace='default', service='PanComponentService', token='null', host='127.0.0.1', port=8201, version='null', protocol='null', weight=null, priority=null, metadata=null, ttl=null, targetServer=com.tencent.polaris.api.plugin.server.TargetServer@1c426027}} succ
+2022-12-17 18:26:48.496 INFO [SpringContextShutdownHook:c.p.b.d.r.a.PolarisDiscoveryAutoDeregister] [Polaris] success to deregister instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:26:48.496 INFO [SpringContextShutdownHook:c.p.b.d.r.a.HeartbeatHandler] [Polaris] success to remove schedule heartbeat instance 127.0.0.1:8201, service is PanComponentService, namespace is default
+2022-12-17 18:26:48.514 INFO [SpringContextShutdownHook:c.t.p.p.r.n.NearbyRouter] reportClientExecutor has been stopped
+2022-12-17 18:26:48.514 INFO [SpringContextShutdownHook:c.t.p.p.c.g.GrpcConnector] start to destroy connector grpc
+2022-12-17 18:26:48.518 INFO [SpringContextShutdownHook:o.s.s.c.ThreadPoolTaskExecutor] Shutting down ExecutorService 'applicationTaskExecutor'
