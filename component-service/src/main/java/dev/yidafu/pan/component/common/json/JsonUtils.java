@@ -28,6 +28,13 @@ public class JsonUtils {
         return root;
     }
 
+    public static Map<String, JsonValue> toMap(ObjectNode root) {
+        Map<String, JsonValue> map = new HashMap<>();
+        tree2Map(root, "", map);
+        return map;
+    }
+
+
     private static <T extends JsonNode> void setPropertyValue(T node, List<String> paths, JsonValue value) {
         if (paths.size() == 1) {
 
@@ -128,5 +135,34 @@ public class JsonUtils {
         }
 
         return  paths;
+    }
+
+    private static <T extends JsonNode> void tree2Map(T node, String prop, Map<String, JsonValue> map) {
+
+        if (node.isObject()) {
+            Iterator<Map.Entry<String, JsonNode>> entries = node.fields();
+            while (entries.hasNext()) {
+                Map.Entry<String, JsonNode> entry = entries.next();
+                tree2Map(entry.getValue(), prop+"." + entry.getKey(), map);
+            }
+        } else if (node.isArray()) {
+            Iterator<JsonNode> it = node.iterator();
+            int index = 0;
+            while (it.hasNext()) {
+                JsonNode childNode = it.next();
+                tree2Map(childNode, prop + "[" + index + "]", map);
+                index++;
+            }
+
+        } else if (node.isValueNode()){
+            String propWithoutDot = prop.substring(1);
+            if (node.isNumber()) {
+                map.put(propWithoutDot, JsonValue.createNumber(node.longValue()));
+            } else if (node.isBoolean()) {
+                map.put(propWithoutDot, JsonValue.createBoolean(node.booleanValue()));
+            } else {
+                map.put(propWithoutDot, JsonValue.createString(node.textValue()));
+            }
+        }
     }
 }
