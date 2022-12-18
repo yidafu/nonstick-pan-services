@@ -1,13 +1,11 @@
-package dev.yidafu.pan.component.domain.vo;
+package dev.yidafu.pan.component.domain.dto;
 
+
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.Data;
 
-import java.util.Date;
-
 @Data
-public class ComponentVo {
-    private Long id;
-
+public class BaseComponentDTO {
     private Long screenId;
 
     private Long groupId;
@@ -38,10 +36,6 @@ public class ComponentVo {
 
     private String umdJsUrl;
 
-    private Date createdAt;
-
-    private Date updatedAt;
-
     private String styleLabelConfig;
 
     private String styleConfig;
@@ -49,5 +43,4 @@ public class ComponentVo {
     private String requestConfig;
 
     private String interactConfig;
-
 }

@@ -82,12 +82,13 @@
 			<optional>true</optional>
 		</dependency>
 
-
+<!--		测试相关依赖-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -160,11 +161,18 @@
 				<executions>
 					<execution>
 						<id>Generate MyBatis Artifacts</id>
+						<phase>deploy</phase>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+				<!--允许移动生成的文件-->
+				<verbose>true</verbose>
+				<!--允许覆盖生成的文件-->
+				<overwrite>true</overwrite>
+			</configuration>
 				<dependencies>
 					<dependency>
 						<groupId>org.mariadb.jdbc</groupId>

@@ -57,11 +57,17 @@
         </javaClientGenerator>
 
         <!--生成全部的表-->
-        <table tableName="vs_components"
+        <table tableName="vs_component"
                domainObjectName="Component"
                sqlProviderName="ComponentProvider"
                mapperName="ComponentMapper">
-        <generatedKey column="id" sqlStatement="Mysql"/>
-    </table>
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="vs_component_attribute"
+               domainObjectName="ComponentAttribute"
+               sqlProviderName="ComponentAttributeProvider"
+               mapperName="ComponentAttributeMapper">
+            <generatedKey column="id" sqlStatement="JDBC"/>
+        </table>
     </context>
 </generatorConfiguration>

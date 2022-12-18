@@ -1,8 +1,8 @@
 package dev.yidafu.pan.component.controller;
 
-import dev.yidafu.pan.component.domain.dto.SaveComponentDto;
-import dev.yidafu.pan.component.domain.dto.UpdateComponentDto;
-import dev.yidafu.pan.component.domain.vo.ComponentVo;
+import dev.yidafu.pan.component.domain.dto.SaveComponentDTO;
+import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO;
+import dev.yidafu.pan.component.domain.vo.ComponentVO;
 import dev.yidafu.pan.component.service.ComponentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,22 +16,22 @@ public class ComponentController {
     ComponentService componentService;
 
     @GetMapping("/component/{id}")
-    public ComponentVo findOne(@PathVariable Long id) {
+    public ComponentVO findOne(@PathVariable Long id) {
         return componentService.findById(id);
     }
 
     @GetMapping("/components")
-    public List<ComponentVo> listByScreen(@RequestParam("screenId") Long screenId) {
+    public List<ComponentVO> listByScreen(@RequestParam("screenId") Long screenId) {
         return componentService.findAllByScreenId(screenId);
     }
 
     @PostMapping("/component")
-    public  ComponentVo createOne(@RequestBody SaveComponentDto dto) {
+    public ComponentVO createOne(@RequestBody SaveComponentDTO dto) {
         return componentService.createOne(dto);
     }
 
     @PutMapping("/component/{id}")
-    public ComponentVo updatePartialOne(@PathVariable Long id, @RequestBody UpdateComponentDto dto) {
+    public ComponentVO updatePartialOne(@PathVariable Long id, @RequestBody UpdateComponentDTO dto) {
         return componentService.updateById(id, dto);
     }
 }
