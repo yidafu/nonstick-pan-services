@@ -11,4 +11,4 @@ default:
 component_maven_test:
   stage: test
   script:
-    - cd component-service && ./mvnw clean test
+    - cd component-service && mvn clean test

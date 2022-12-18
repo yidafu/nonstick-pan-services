@@ -208,6 +208,15 @@
 							<version>${lombok-mapstruct-binding.version}</version>
 						</path>
 					</annotationProcessorPaths>
+					<executions>
+						<execution>
+							<id>Generate MyBatis Artifacts</id>
+							<phase>deploy</phase>
+							<goals>
+								<goal>generate</goal>
+							</goals>
+						</execution>
+					</executions>
 				</configuration>
 			</plugin>
 		</plugins>
