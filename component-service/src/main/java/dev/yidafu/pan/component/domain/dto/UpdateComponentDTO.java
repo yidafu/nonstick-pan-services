@@ -1,5 +1,5 @@
 package dev.yidafu.pan.component.domain.dto;
 
-public class UpdateComponentDto extends BaseCompnentDto {
+public class UpdateComponentDTO extends BaseComponentDTO {
 
 }

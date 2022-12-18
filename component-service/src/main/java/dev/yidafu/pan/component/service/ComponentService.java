@@ -1,17 +1,17 @@
 package dev.yidafu.pan.component.service;
 
-import dev.yidafu.pan.component.domain.dto.SaveComponentDto;
-import dev.yidafu.pan.component.domain.dto.UpdateComponentDto;
-import dev.yidafu.pan.component.domain.vo.ComponentVo;
+import dev.yidafu.pan.component.domain.dto.SaveComponentDTO;
+import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO;
+import dev.yidafu.pan.component.domain.vo.ComponentVO;
 
 import java.util.List;
 
 public interface ComponentService {
-    ComponentVo findById(Long id);
+    ComponentVO findById(Long id);
 
-    List<ComponentVo> findAllByScreenId(Long screenId);
+    List<ComponentVO> findAllByScreenId(Long screenId);
 
-    ComponentVo updateById(Long id, UpdateComponentDto dto);
+    ComponentVO updateById(Long id, UpdateComponentDTO dto);
 
-    ComponentVo createOne(SaveComponentDto dto);
+    ComponentVO createOne(SaveComponentDTO dto);
 }

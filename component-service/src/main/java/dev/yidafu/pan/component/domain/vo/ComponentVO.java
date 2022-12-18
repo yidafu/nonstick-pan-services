@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class ComponentVo {
+public class ComponentVO {
     private Long id;
 
     private Long screenId;

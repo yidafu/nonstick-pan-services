@@ -4,7 +4,7 @@ package dev.yidafu.pan.component.domain.dto;
 import lombok.Data;
 
 @Data
-public class BaseCompnentDto {
+public class BaseComponentDTO {
     private Long screenId;
 
     private Long groupId;

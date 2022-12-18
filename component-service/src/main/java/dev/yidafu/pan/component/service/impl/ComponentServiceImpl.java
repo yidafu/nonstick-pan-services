@@ -3,35 +3,37 @@ package dev.yidafu.pan.component.service.impl;
 import dev.yidafu.pan.component.convertor.ComponentConvertor;
 import dev.yidafu.pan.component.domain.dao.ComponentDynamicSqlSupport;
 import dev.yidafu.pan.component.domain.dao.ComponentMapper;
-import dev.yidafu.pan.component.domain.dto.SaveComponentDto;
-import dev.yidafu.pan.component.domain.dto.UpdateComponentDto;
+import dev.yidafu.pan.component.domain.dto.SaveComponentDTO;
+import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO;
 import dev.yidafu.pan.component.domain.entity.Component;
-import dev.yidafu.pan.component.domain.vo.ComponentVo;
+import dev.yidafu.pan.component.domain.vo.ComponentVO;
 import dev.yidafu.pan.component.service.ComponentService;
 import org.mybatis.dynamic.sql.select.SelectDSLCompleter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
+@Service
 public class ComponentServiceImpl implements ComponentService {
-    @Autowired(required = false)
+    @Autowired
     ComponentMapper componentMapper;
 
     @Autowired
     ComponentConvertor convertor;
 
     @Override
-    public ComponentVo findById(Long id) {
+    public ComponentVO findById(Long id) {
         SelectDSLCompleter completer = c -> c.where().and(ComponentDynamicSqlSupport.id, isEqualTo(id));
         Optional<Component> optCom = componentMapper.selectOne(completer);
         return optCom.map(component -> convertor.to(component)).orElse(null);
     }
 
     @Override
-    public List<ComponentVo> findAllByScreenId(Long screenId) {
+    public List<ComponentVO> findAllByScreenId(Long screenId) {
         SelectDSLCompleter completer = c -> c.where().and(ComponentDynamicSqlSupport.screenId, isEqualTo(screenId));
         List<Component> componentList = componentMapper.select(completer);
 
@@ -39,7 +41,7 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
-    public ComponentVo updateById(Long id, UpdateComponentDto dto) {
+    public ComponentVO updateById(Long id, UpdateComponentDTO dto) {
         Component component = convertor.from(dto);
         component.setId(id);
         componentMapper.updateByPrimaryKey(component);
@@ -47,7 +49,7 @@ public class ComponentServiceImpl implements ComponentService {
     }
 
     @Override
-    public ComponentVo createOne(SaveComponentDto dto) {
+    public ComponentVO createOne(SaveComponentDTO dto) {
         Component component = convertor.from(dto);
 
         componentMapper.insert(component);

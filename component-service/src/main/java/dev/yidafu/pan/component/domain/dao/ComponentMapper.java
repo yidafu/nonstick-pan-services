@@ -43,28 +43,28 @@ public interface ComponentMapper extends CommonCountMapper, CommonDeleteMapper, 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @Results(id="ComponentResult", value = {
-            @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-            @Result(column="screen_id", property="screenId", jdbcType=JdbcType.BIGINT),
-            @Result(column="group_id", property="groupId", jdbcType=JdbcType.BIGINT),
-            @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
-            @Result(column="layer_name", property="layerName", jdbcType=JdbcType.VARCHAR),
-            @Result(column="is_group", property="isGroup", jdbcType=JdbcType.TINYINT),
-            @Result(column="width", property="width", jdbcType=JdbcType.INTEGER),
-            @Result(column="height", property="height", jdbcType=JdbcType.INTEGER),
-            @Result(column="offset_x", property="offsetX", jdbcType=JdbcType.INTEGER),
-            @Result(column="offset_y", property="offsetY", jdbcType=JdbcType.INTEGER),
-            @Result(column="z_index", property="zIndex", jdbcType=JdbcType.INTEGER),
-            @Result(column="is_lock", property="isLock", jdbcType=JdbcType.TINYINT),
-            @Result(column="is_lock_aspect_ratio", property="isLockAspectRatio", jdbcType=JdbcType.TINYINT),
-            @Result(column="category", property="category", jdbcType=JdbcType.VARCHAR),
-            @Result(column="sub_category", property="subCategory", jdbcType=JdbcType.VARCHAR),
-            @Result(column="umd_js_url", property="umdJsUrl", jdbcType=JdbcType.VARCHAR),
-            @Result(column="created_at", property="createdAt", jdbcType=JdbcType.TIMESTAMP),
-            @Result(column="updated_at", property="updatedAt", jdbcType=JdbcType.TIMESTAMP),
-            @Result(column="style_label_config", property="styleLabelConfig", jdbcType=JdbcType.LONGVARCHAR),
-            @Result(column="style_config", property="styleConfig", jdbcType=JdbcType.LONGVARCHAR),
-            @Result(column="request_config", property="requestConfig", jdbcType=JdbcType.LONGVARCHAR),
-            @Result(column="interact_config", property="interactConfig", jdbcType=JdbcType.LONGVARCHAR)
+        @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
+        @Result(column="screen_id", property="screenId", jdbcType=JdbcType.BIGINT),
+        @Result(column="group_id", property="groupId", jdbcType=JdbcType.BIGINT),
+        @Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
+        @Result(column="layer_name", property="layerName", jdbcType=JdbcType.VARCHAR),
+        @Result(column="is_group", property="isGroup", jdbcType=JdbcType.TINYINT),
+        @Result(column="width", property="width", jdbcType=JdbcType.INTEGER),
+        @Result(column="height", property="height", jdbcType=JdbcType.INTEGER),
+        @Result(column="offset_x", property="offsetX", jdbcType=JdbcType.INTEGER),
+        @Result(column="offset_y", property="offsetY", jdbcType=JdbcType.INTEGER),
+        @Result(column="z_index", property="zIndex", jdbcType=JdbcType.INTEGER),
+        @Result(column="is_lock", property="isLock", jdbcType=JdbcType.TINYINT),
+        @Result(column="is_lock_aspect_ratio", property="isLockAspectRatio", jdbcType=JdbcType.TINYINT),
+        @Result(column="category", property="category", jdbcType=JdbcType.VARCHAR),
+        @Result(column="sub_category", property="subCategory", jdbcType=JdbcType.VARCHAR),
+        @Result(column="umd_js_url", property="umdJsUrl", jdbcType=JdbcType.VARCHAR),
+        @Result(column="created_at", property="createdAt", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="updated_at", property="updatedAt", jdbcType=JdbcType.TIMESTAMP),
+        @Result(column="style_label_config", property="styleLabelConfig", jdbcType=JdbcType.LONGVARCHAR),
+        @Result(column="style_config", property="styleConfig", jdbcType=JdbcType.LONGVARCHAR),
+        @Result(column="request_config", property="requestConfig", jdbcType=JdbcType.LONGVARCHAR),
+        @Result(column="interact_config", property="interactConfig", jdbcType=JdbcType.LONGVARCHAR)
     })
     List<Component> selectMany(SelectStatementProvider selectStatement);
 
@@ -85,64 +85,64 @@ public interface ComponentMapper extends CommonCountMapper, CommonDeleteMapper, 
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int deleteByPrimaryKey(Long id_) {
-        return delete(c ->
-                c.where(id, isEqualTo(id_))
+        return delete(c -> 
+            c.where(id, isEqualTo(id_))
         );
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int insert(Component row) {
         return MyBatis3Utils.insert(this::insert, row, component, c ->
-                c.map(id).toProperty("id")
-                        .map(screenId).toProperty("screenId")
-                        .map(groupId).toProperty("groupId")
-                        .map(name).toProperty("name")
-                        .map(layerName).toProperty("layerName")
-                        .map(isGroup).toProperty("isGroup")
-                        .map(width).toProperty("width")
-                        .map(height).toProperty("height")
-                        .map(offsetX).toProperty("offsetX")
-                        .map(offsetY).toProperty("offsetY")
-                        .map(zIndex).toProperty("zIndex")
-                        .map(isLock).toProperty("isLock")
-                        .map(isLockAspectRatio).toProperty("isLockAspectRatio")
-                        .map(category).toProperty("category")
-                        .map(subCategory).toProperty("subCategory")
-                        .map(umdJsUrl).toProperty("umdJsUrl")
-                        .map(createdAt).toProperty("createdAt")
-                        .map(updatedAt).toProperty("updatedAt")
-                        .map(styleLabelConfig).toProperty("styleLabelConfig")
-                        .map(styleConfig).toProperty("styleConfig")
-                        .map(requestConfig).toProperty("requestConfig")
-                        .map(interactConfig).toProperty("interactConfig")
+            c.map(id).toProperty("id")
+            .map(screenId).toProperty("screenId")
+            .map(groupId).toProperty("groupId")
+            .map(name).toProperty("name")
+            .map(layerName).toProperty("layerName")
+            .map(isGroup).toProperty("isGroup")
+            .map(width).toProperty("width")
+            .map(height).toProperty("height")
+            .map(offsetX).toProperty("offsetX")
+            .map(offsetY).toProperty("offsetY")
+            .map(zIndex).toProperty("zIndex")
+            .map(isLock).toProperty("isLock")
+            .map(isLockAspectRatio).toProperty("isLockAspectRatio")
+            .map(category).toProperty("category")
+            .map(subCategory).toProperty("subCategory")
+            .map(umdJsUrl).toProperty("umdJsUrl")
+            .map(createdAt).toProperty("createdAt")
+            .map(updatedAt).toProperty("updatedAt")
+            .map(styleLabelConfig).toProperty("styleLabelConfig")
+            .map(styleConfig).toProperty("styleConfig")
+            .map(requestConfig).toProperty("requestConfig")
+            .map(interactConfig).toProperty("interactConfig")
         );
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int insertSelective(Component row) {
         return MyBatis3Utils.insert(this::insert, row, component, c ->
-                c.map(id).toProperty("id")
-                        .map(screenId).toPropertyWhenPresent("screenId", row::getScreenId)
-                        .map(groupId).toPropertyWhenPresent("groupId", row::getGroupId)
-                        .map(name).toPropertyWhenPresent("name", row::getName)
-                        .map(layerName).toPropertyWhenPresent("layerName", row::getLayerName)
-                        .map(isGroup).toPropertyWhenPresent("isGroup", row::getIsGroup)
-                        .map(width).toPropertyWhenPresent("width", row::getWidth)
-                        .map(height).toPropertyWhenPresent("height", row::getHeight)
-                        .map(offsetX).toPropertyWhenPresent("offsetX", row::getOffsetX)
-                        .map(offsetY).toPropertyWhenPresent("offsetY", row::getOffsetY)
-                        .map(zIndex).toPropertyWhenPresent("zIndex", row::getzIndex)
-                        .map(isLock).toPropertyWhenPresent("isLock", row::getIsLock)
-                        .map(isLockAspectRatio).toPropertyWhenPresent("isLockAspectRatio", row::getIsLockAspectRatio)
-                        .map(category).toPropertyWhenPresent("category", row::getCategory)
-                        .map(subCategory).toPropertyWhenPresent("subCategory", row::getSubCategory)
-                        .map(umdJsUrl).toPropertyWhenPresent("umdJsUrl", row::getUmdJsUrl)
-                        .map(createdAt).toPropertyWhenPresent("createdAt", row::getCreatedAt)
-                        .map(updatedAt).toPropertyWhenPresent("updatedAt", row::getUpdatedAt)
-                        .map(styleLabelConfig).toPropertyWhenPresent("styleLabelConfig", row::getStyleLabelConfig)
-                        .map(styleConfig).toPropertyWhenPresent("styleConfig", row::getStyleConfig)
-                        .map(requestConfig).toPropertyWhenPresent("requestConfig", row::getRequestConfig)
-                        .map(interactConfig).toPropertyWhenPresent("interactConfig", row::getInteractConfig)
+            c.map(id).toProperty("id")
+            .map(screenId).toPropertyWhenPresent("screenId", row::getScreenId)
+            .map(groupId).toPropertyWhenPresent("groupId", row::getGroupId)
+            .map(name).toPropertyWhenPresent("name", row::getName)
+            .map(layerName).toPropertyWhenPresent("layerName", row::getLayerName)
+            .map(isGroup).toPropertyWhenPresent("isGroup", row::getIsGroup)
+            .map(width).toPropertyWhenPresent("width", row::getWidth)
+            .map(height).toPropertyWhenPresent("height", row::getHeight)
+            .map(offsetX).toPropertyWhenPresent("offsetX", row::getOffsetX)
+            .map(offsetY).toPropertyWhenPresent("offsetY", row::getOffsetY)
+            .map(zIndex).toPropertyWhenPresent("zIndex", row::getzIndex)
+            .map(isLock).toPropertyWhenPresent("isLock", row::getIsLock)
+            .map(isLockAspectRatio).toPropertyWhenPresent("isLockAspectRatio", row::getIsLockAspectRatio)
+            .map(category).toPropertyWhenPresent("category", row::getCategory)
+            .map(subCategory).toPropertyWhenPresent("subCategory", row::getSubCategory)
+            .map(umdJsUrl).toPropertyWhenPresent("umdJsUrl", row::getUmdJsUrl)
+            .map(createdAt).toPropertyWhenPresent("createdAt", row::getCreatedAt)
+            .map(updatedAt).toPropertyWhenPresent("updatedAt", row::getUpdatedAt)
+            .map(styleLabelConfig).toPropertyWhenPresent("styleLabelConfig", row::getStyleLabelConfig)
+            .map(styleConfig).toPropertyWhenPresent("styleConfig", row::getStyleConfig)
+            .map(requestConfig).toPropertyWhenPresent("requestConfig", row::getRequestConfig)
+            .map(interactConfig).toPropertyWhenPresent("interactConfig", row::getInteractConfig)
         );
     }
 
@@ -164,7 +164,7 @@ public interface ComponentMapper extends CommonCountMapper, CommonDeleteMapper, 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default Optional<Component> selectByPrimaryKey(Long id_) {
         return selectOne(c ->
-                c.where(id, isEqualTo(id_))
+            c.where(id, isEqualTo(id_))
         );
     }
 
@@ -228,56 +228,56 @@ public interface ComponentMapper extends CommonCountMapper, CommonDeleteMapper, 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int updateByPrimaryKey(Component row) {
         return update(c ->
-                c.set(screenId).equalTo(row::getScreenId)
-                        .set(groupId).equalTo(row::getGroupId)
-                        .set(name).equalTo(row::getName)
-                        .set(layerName).equalTo(row::getLayerName)
-                        .set(isGroup).equalTo(row::getIsGroup)
-                        .set(width).equalTo(row::getWidth)
-                        .set(height).equalTo(row::getHeight)
-                        .set(offsetX).equalTo(row::getOffsetX)
-                        .set(offsetY).equalTo(row::getOffsetY)
-                        .set(zIndex).equalTo(row::getzIndex)
-                        .set(isLock).equalTo(row::getIsLock)
-                        .set(isLockAspectRatio).equalTo(row::getIsLockAspectRatio)
-                        .set(category).equalTo(row::getCategory)
-                        .set(subCategory).equalTo(row::getSubCategory)
-                        .set(umdJsUrl).equalTo(row::getUmdJsUrl)
-                        .set(createdAt).equalTo(row::getCreatedAt)
-                        .set(updatedAt).equalTo(row::getUpdatedAt)
-                        .set(styleLabelConfig).equalTo(row::getStyleLabelConfig)
-                        .set(styleConfig).equalTo(row::getStyleConfig)
-                        .set(requestConfig).equalTo(row::getRequestConfig)
-                        .set(interactConfig).equalTo(row::getInteractConfig)
-                        .where(id, isEqualTo(row::getId))
+            c.set(screenId).equalTo(row::getScreenId)
+            .set(groupId).equalTo(row::getGroupId)
+            .set(name).equalTo(row::getName)
+            .set(layerName).equalTo(row::getLayerName)
+            .set(isGroup).equalTo(row::getIsGroup)
+            .set(width).equalTo(row::getWidth)
+            .set(height).equalTo(row::getHeight)
+            .set(offsetX).equalTo(row::getOffsetX)
+            .set(offsetY).equalTo(row::getOffsetY)
+            .set(zIndex).equalTo(row::getzIndex)
+            .set(isLock).equalTo(row::getIsLock)
+            .set(isLockAspectRatio).equalTo(row::getIsLockAspectRatio)
+            .set(category).equalTo(row::getCategory)
+            .set(subCategory).equalTo(row::getSubCategory)
+            .set(umdJsUrl).equalTo(row::getUmdJsUrl)
+            .set(createdAt).equalTo(row::getCreatedAt)
+            .set(updatedAt).equalTo(row::getUpdatedAt)
+            .set(styleLabelConfig).equalTo(row::getStyleLabelConfig)
+            .set(styleConfig).equalTo(row::getStyleConfig)
+            .set(requestConfig).equalTo(row::getRequestConfig)
+            .set(interactConfig).equalTo(row::getInteractConfig)
+            .where(id, isEqualTo(row::getId))
         );
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int updateByPrimaryKeySelective(Component row) {
         return update(c ->
-                c.set(screenId).equalToWhenPresent(row::getScreenId)
-                        .set(groupId).equalToWhenPresent(row::getGroupId)
-                        .set(name).equalToWhenPresent(row::getName)
-                        .set(layerName).equalToWhenPresent(row::getLayerName)
-                        .set(isGroup).equalToWhenPresent(row::getIsGroup)
-                        .set(width).equalToWhenPresent(row::getWidth)
-                        .set(height).equalToWhenPresent(row::getHeight)
-                        .set(offsetX).equalToWhenPresent(row::getOffsetX)
-                        .set(offsetY).equalToWhenPresent(row::getOffsetY)
-                        .set(zIndex).equalToWhenPresent(row::getzIndex)
-                        .set(isLock).equalToWhenPresent(row::getIsLock)
-                        .set(isLockAspectRatio).equalToWhenPresent(row::getIsLockAspectRatio)
-                        .set(category).equalToWhenPresent(row::getCategory)
-                        .set(subCategory).equalToWhenPresent(row::getSubCategory)
-                        .set(umdJsUrl).equalToWhenPresent(row::getUmdJsUrl)
-                        .set(createdAt).equalToWhenPresent(row::getCreatedAt)
-                        .set(updatedAt).equalToWhenPresent(row::getUpdatedAt)
-                        .set(styleLabelConfig).equalToWhenPresent(row::getStyleLabelConfig)
-                        .set(styleConfig).equalToWhenPresent(row::getStyleConfig)
-                        .set(requestConfig).equalToWhenPresent(row::getRequestConfig)
-                        .set(interactConfig).equalToWhenPresent(row::getInteractConfig)
-                        .where(id, isEqualTo(row::getId))
+            c.set(screenId).equalToWhenPresent(row::getScreenId)
+            .set(groupId).equalToWhenPresent(row::getGroupId)
+            .set(name).equalToWhenPresent(row::getName)
+            .set(layerName).equalToWhenPresent(row::getLayerName)
+            .set(isGroup).equalToWhenPresent(row::getIsGroup)
+            .set(width).equalToWhenPresent(row::getWidth)
+            .set(height).equalToWhenPresent(row::getHeight)
+            .set(offsetX).equalToWhenPresent(row::getOffsetX)
+            .set(offsetY).equalToWhenPresent(row::getOffsetY)
+            .set(zIndex).equalToWhenPresent(row::getzIndex)
+            .set(isLock).equalToWhenPresent(row::getIsLock)
+            .set(isLockAspectRatio).equalToWhenPresent(row::getIsLockAspectRatio)
+            .set(category).equalToWhenPresent(row::getCategory)
+            .set(subCategory).equalToWhenPresent(row::getSubCategory)
+            .set(umdJsUrl).equalToWhenPresent(row::getUmdJsUrl)
+            .set(createdAt).equalToWhenPresent(row::getCreatedAt)
+            .set(updatedAt).equalToWhenPresent(row::getUpdatedAt)
+            .set(styleLabelConfig).equalToWhenPresent(row::getStyleLabelConfig)
+            .set(styleConfig).equalToWhenPresent(row::getStyleConfig)
+            .set(requestConfig).equalToWhenPresent(row::getRequestConfig)
+            .set(interactConfig).equalToWhenPresent(row::getInteractConfig)
+            .where(id, isEqualTo(row::getId))
         );
     }
 }

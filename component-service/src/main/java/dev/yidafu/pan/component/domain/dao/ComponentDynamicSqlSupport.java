@@ -123,7 +123,7 @@ public final class ComponentDynamicSqlSupport {
         public final SqlColumn<String> interactConfig = column("interact_config", JDBCType.LONGVARCHAR);
 
         public Component() {
-            super("vs_components", Component::new);
+            super("vs_component", Component::new);
         }
     }
 }

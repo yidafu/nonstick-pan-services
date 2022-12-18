@@ -1,9 +1,9 @@
 package dev.yidafu.pan.component.convertor;
 
-import dev.yidafu.pan.component.domain.dto.SaveComponentDto;
-import dev.yidafu.pan.component.domain.dto.UpdateComponentDto;
+import dev.yidafu.pan.component.domain.dto.SaveComponentDTO;
+import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO;
 import dev.yidafu.pan.component.domain.entity.Component;
-import dev.yidafu.pan.component.domain.vo.ComponentVo;
+import dev.yidafu.pan.component.domain.vo.ComponentVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -13,11 +13,11 @@ import java.util.List;
 public interface ComponentConvertor {
     ComponentConvertor INSTANCE = Mappers.getMapper(ComponentConvertor.class);
 
-    List<ComponentVo> to(List<Component> list);
+    List<ComponentVO> to(List<Component> list);
 
-    ComponentVo to(Component com);
+    ComponentVO to(Component com);
 
-    Component from(SaveComponentDto dto);
+    Component from(SaveComponentDTO dto);
 
-    Component from(UpdateComponentDto dto);
+    Component from(UpdateComponentDTO dto);
 }
