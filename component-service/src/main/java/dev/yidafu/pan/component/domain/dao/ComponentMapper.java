@@ -4,15 +4,17 @@ import static dev.yidafu.pan.component.domain.dao.ComponentDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
 import dev.yidafu.pan.component.domain.entity.Component;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Generated;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.dynamic.sql.BasicColumn;
@@ -37,8 +39,13 @@ public interface ComponentMapper extends CommonCountMapper, CommonDeleteMapper, 
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="row.id", before=true, resultType=Long.class)
+    @Options(useGeneratedKeys=true,keyProperty="row.id")
     int insert(InsertStatementProvider<Component> insertStatement);
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    @InsertProvider(type=SqlProviderAdapter.class, method="insertMultipleWithGeneratedKeys")
+    @Options(useGeneratedKeys=true,keyProperty="records.id")
+    int insertMultiple(@Param("insertStatement") String insertStatement, @Param("records") List<Component> records);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
@@ -93,8 +100,34 @@ public interface ComponentMapper extends CommonCountMapper, CommonDeleteMapper, 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int insert(Component row) {
         return MyBatis3Utils.insert(this::insert, row, component, c ->
-            c.map(id).toProperty("id")
-            .map(screenId).toProperty("screenId")
+            c.map(screenId).toProperty("screenId")
+            .map(groupId).toProperty("groupId")
+            .map(name).toProperty("name")
+            .map(layerName).toProperty("layerName")
+            .map(isGroup).toProperty("isGroup")
+            .map(width).toProperty("width")
+            .map(height).toProperty("height")
+            .map(offsetX).toProperty("offsetX")
+            .map(offsetY).toProperty("offsetY")
+            .map(zIndex).toProperty("zIndex")
+            .map(isLock).toProperty("isLock")
+            .map(isLockAspectRatio).toProperty("isLockAspectRatio")
+            .map(category).toProperty("category")
+            .map(subCategory).toProperty("subCategory")
+            .map(umdJsUrl).toProperty("umdJsUrl")
+            .map(createdAt).toProperty("createdAt")
+            .map(updatedAt).toProperty("updatedAt")
+            .map(styleLabelConfig).toProperty("styleLabelConfig")
+            .map(styleConfig).toProperty("styleConfig")
+            .map(requestConfig).toProperty("requestConfig")
+            .map(interactConfig).toProperty("interactConfig")
+        );
+    }
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    default int insertMultiple(Collection<Component> records) {
+        return MyBatis3Utils.insertMultipleWithGeneratedKeys(this::insertMultiple, records, component, c ->
+            c.map(screenId).toProperty("screenId")
             .map(groupId).toProperty("groupId")
             .map(name).toProperty("name")
             .map(layerName).toProperty("layerName")
@@ -121,8 +154,7 @@ public interface ComponentMapper extends CommonCountMapper, CommonDeleteMapper, 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int insertSelective(Component row) {
         return MyBatis3Utils.insert(this::insert, row, component, c ->
-            c.map(id).toProperty("id")
-            .map(screenId).toPropertyWhenPresent("screenId", row::getScreenId)
+            c.map(screenId).toPropertyWhenPresent("screenId", row::getScreenId)
             .map(groupId).toPropertyWhenPresent("groupId", row::getGroupId)
             .map(name).toPropertyWhenPresent("name", row::getName)
             .map(layerName).toPropertyWhenPresent("layerName", row::getLayerName)
@@ -175,8 +207,7 @@ public interface ComponentMapper extends CommonCountMapper, CommonDeleteMapper, 
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     static UpdateDSL<UpdateModel> updateAllColumns(Component row, UpdateDSL<UpdateModel> dsl) {
-        return dsl.set(id).equalTo(row::getId)
-                .set(screenId).equalTo(row::getScreenId)
+        return dsl.set(screenId).equalTo(row::getScreenId)
                 .set(groupId).equalTo(row::getGroupId)
                 .set(name).equalTo(row::getName)
                 .set(layerName).equalTo(row::getLayerName)
@@ -201,8 +232,7 @@ public interface ComponentMapper extends CommonCountMapper, CommonDeleteMapper, 
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     static UpdateDSL<UpdateModel> updateSelectiveColumns(Component row, UpdateDSL<UpdateModel> dsl) {
-        return dsl.set(id).equalToWhenPresent(row::getId)
-                .set(screenId).equalToWhenPresent(row::getScreenId)
+        return dsl.set(screenId).equalToWhenPresent(row::getScreenId)
                 .set(groupId).equalToWhenPresent(row::getGroupId)
                 .set(name).equalToWhenPresent(row::getName)
                 .set(layerName).equalToWhenPresent(row::getLayerName)

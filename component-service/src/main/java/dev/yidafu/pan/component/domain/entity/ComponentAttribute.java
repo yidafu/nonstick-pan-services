@@ -9,7 +9,7 @@ public class ComponentAttribute implements Serializable {
     private Long id;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    private Long owerId;
+    private Long ownerId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     private String attr;
@@ -40,13 +40,13 @@ public class ComponentAttribute implements Serializable {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public Long getOwerId() {
-        return owerId;
+    public Long getOwnerId() {
+        return ownerId;
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setOwerId(Long owerId) {
-        this.owerId = owerId;
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")

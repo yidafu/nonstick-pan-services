@@ -4,15 +4,17 @@ import static dev.yidafu.pan.component.domain.dao.ComponentAttributeDynamicSqlSu
 import static org.mybatis.dynamic.sql.SqlBuilder.isEqualTo;
 
 import dev.yidafu.pan.component.domain.entity.ComponentAttribute;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Generated;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.SelectKey;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.dynamic.sql.BasicColumn;
@@ -33,18 +35,23 @@ import org.mybatis.dynamic.sql.util.mybatis3.MyBatis3Utils;
 @Mapper
 public interface ComponentAttributeMapper extends CommonCountMapper, CommonDeleteMapper, CommonUpdateMapper {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    BasicColumn[] selectList = BasicColumn.columnList(id, owerId, attr, valueType, value, createdAt, updatedAt);
+    BasicColumn[] selectList = BasicColumn.columnList(id, ownerId, attr, valueType, value, createdAt, updatedAt);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @InsertProvider(type=SqlProviderAdapter.class, method="insert")
-    @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="row.id", before=true, resultType=Long.class)
+    @Options(useGeneratedKeys=true,keyProperty="row.id")
     int insert(InsertStatementProvider<ComponentAttribute> insertStatement);
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    @InsertProvider(type=SqlProviderAdapter.class, method="insertMultipleWithGeneratedKeys")
+    @Options(useGeneratedKeys=true,keyProperty="records.id")
+    int insertMultiple(@Param("insertStatement") String insertStatement, @Param("records") List<ComponentAttribute> records);
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     @SelectProvider(type=SqlProviderAdapter.class, method="select")
     @Results(id="ComponentAttributeResult", value = {
         @Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        @Result(column="ower_id", property="owerId", jdbcType=JdbcType.BIGINT),
+        @Result(column="owner_id", property="ownerId", jdbcType=JdbcType.BIGINT),
         @Result(column="attr", property="attr", jdbcType=JdbcType.VARCHAR),
         @Result(column="value_type", property="valueType", jdbcType=JdbcType.TINYINT),
         @Result(column="value", property="value", jdbcType=JdbcType.VARCHAR),
@@ -78,8 +85,19 @@ public interface ComponentAttributeMapper extends CommonCountMapper, CommonDelet
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int insert(ComponentAttribute row) {
         return MyBatis3Utils.insert(this::insert, row, componentAttribute, c ->
-            c.map(id).toProperty("id")
-            .map(owerId).toProperty("owerId")
+            c.map(ownerId).toProperty("ownerId")
+            .map(attr).toProperty("attr")
+            .map(valueType).toProperty("valueType")
+            .map(value).toProperty("value")
+            .map(createdAt).toProperty("createdAt")
+            .map(updatedAt).toProperty("updatedAt")
+        );
+    }
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    default int insertMultiple(Collection<ComponentAttribute> records) {
+        return MyBatis3Utils.insertMultipleWithGeneratedKeys(this::insertMultiple, records, componentAttribute, c ->
+            c.map(ownerId).toProperty("ownerId")
             .map(attr).toProperty("attr")
             .map(valueType).toProperty("valueType")
             .map(value).toProperty("value")
@@ -91,8 +109,7 @@ public interface ComponentAttributeMapper extends CommonCountMapper, CommonDelet
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int insertSelective(ComponentAttribute row) {
         return MyBatis3Utils.insert(this::insert, row, componentAttribute, c ->
-            c.map(id).toProperty("id")
-            .map(owerId).toPropertyWhenPresent("owerId", row::getOwerId)
+            c.map(ownerId).toPropertyWhenPresent("ownerId", row::getOwnerId)
             .map(attr).toPropertyWhenPresent("attr", row::getAttr)
             .map(valueType).toPropertyWhenPresent("valueType", row::getValueType)
             .map(value).toPropertyWhenPresent("value", row::getValue)
@@ -130,8 +147,7 @@ public interface ComponentAttributeMapper extends CommonCountMapper, CommonDelet
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     static UpdateDSL<UpdateModel> updateAllColumns(ComponentAttribute row, UpdateDSL<UpdateModel> dsl) {
-        return dsl.set(id).equalTo(row::getId)
-                .set(owerId).equalTo(row::getOwerId)
+        return dsl.set(ownerId).equalTo(row::getOwnerId)
                 .set(attr).equalTo(row::getAttr)
                 .set(valueType).equalTo(row::getValueType)
                 .set(value).equalTo(row::getValue)
@@ -141,8 +157,7 @@ public interface ComponentAttributeMapper extends CommonCountMapper, CommonDelet
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     static UpdateDSL<UpdateModel> updateSelectiveColumns(ComponentAttribute row, UpdateDSL<UpdateModel> dsl) {
-        return dsl.set(id).equalToWhenPresent(row::getId)
-                .set(owerId).equalToWhenPresent(row::getOwerId)
+        return dsl.set(ownerId).equalToWhenPresent(row::getOwnerId)
                 .set(attr).equalToWhenPresent(row::getAttr)
                 .set(valueType).equalToWhenPresent(row::getValueType)
                 .set(value).equalToWhenPresent(row::getValue)
@@ -153,7 +168,7 @@ public interface ComponentAttributeMapper extends CommonCountMapper, CommonDelet
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int updateByPrimaryKey(ComponentAttribute row) {
         return update(c ->
-            c.set(owerId).equalTo(row::getOwerId)
+            c.set(ownerId).equalTo(row::getOwnerId)
             .set(attr).equalTo(row::getAttr)
             .set(valueType).equalTo(row::getValueType)
             .set(value).equalTo(row::getValue)
@@ -166,7 +181,7 @@ public interface ComponentAttributeMapper extends CommonCountMapper, CommonDelet
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     default int updateByPrimaryKeySelective(ComponentAttribute row) {
         return update(c ->
-            c.set(owerId).equalToWhenPresent(row::getOwerId)
+            c.set(ownerId).equalToWhenPresent(row::getOwnerId)
             .set(attr).equalToWhenPresent(row::getAttr)
             .set(valueType).equalToWhenPresent(row::getValueType)
             .set(value).equalToWhenPresent(row::getValue)

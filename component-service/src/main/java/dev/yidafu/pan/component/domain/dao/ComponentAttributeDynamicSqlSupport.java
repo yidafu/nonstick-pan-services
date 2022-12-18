@@ -14,7 +14,7 @@ public final class ComponentAttributeDynamicSqlSupport {
     public static final SqlColumn<Long> id = componentAttribute.id;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public static final SqlColumn<Long> owerId = componentAttribute.owerId;
+    public static final SqlColumn<Long> ownerId = componentAttribute.ownerId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public static final SqlColumn<String> attr = componentAttribute.attr;
@@ -35,7 +35,7 @@ public final class ComponentAttributeDynamicSqlSupport {
     public static final class ComponentAttribute extends AliasableSqlTable<ComponentAttribute> {
         public final SqlColumn<Long> id = column("id", JDBCType.BIGINT);
 
-        public final SqlColumn<Long> owerId = column("ower_id", JDBCType.BIGINT);
+        public final SqlColumn<Long> ownerId = column("owner_id", JDBCType.BIGINT);
 
         public final SqlColumn<String> attr = column("attr", JDBCType.VARCHAR);
 
