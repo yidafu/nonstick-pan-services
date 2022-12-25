@@ -1,107 +1,136 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+//import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+//
+//
+//plugins {
+//    id 'org.springframework.boot' version '3.0.1'
+//    id 'io.spring.dependency-management' version '1.1.0'
+//    id 'org.graalvm.buildtools.native' version '0.9.18'
+//    id 'org.jetbrains.kotlin.jvm' version '1.7.22'
+//    id 'org.jetbrains.kotlin.plugin.spring' version '1.7.22'
+//}
+//
+//// https://kevcodez.de/posts/2018-08-19-test-coverage-in-kotlin-with-jacoco/
+//apply plugin: 'jacoco'
+//apply plugin: 'org.springframework.boot'
+//apply plugin: 'io.spring.dependency-management'
+//
+//ext {
+//    mybatisMapperVersion = '3.5.11'
+//    mybatisGeneratorVersion = '1.4.1'
+//    mariadbConnectorJavaVersion = '3.1.0'
+//    springCloudDependencies = '2022.0.0'
+//    cloudTencentDependencies = '1.8.2-2022.0.0'
+//    mapstructVersion = '1.5.3.Final'
+//    mariadbConnectorJavaVersion = '3.1.0'
+//}
+//
+//dependencyManagement {
+//    imports {
+//        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudDependencies}"
+//        mavenBom "com.tencent.cloud:spring-cloud-tencent-dependencies:${cloudTencentDependencies}"
+//    }
+//}
+//
+//group = 'dev.yidafu.pan.component'
+//version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = '17'
+//
+//configurations {
+//    compileOnly {
+//        extendsFrom annotationProcessor
+//    }
+//}
+//
+//repositories {
+//    maven {name "腾讯云镜像" url "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/"}
+//    maven { name "阿里云镜像" url "https://maven.aliyun.com/nexus/content/groups/public/" }
+//    maven { name = "华为开源镜像库" url "https://mirrors.huaweicloud.com/repository/maven/" }
+//
+//    mavenCentral()
+//}
+//
+//dependencies {
+//    implementation 'org.springframework.boot:spring-boot-starter-web'
+//    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+//    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+//    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+//
+//    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+//    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+//
+//    // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+//    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: mariadbConnectorJavaVersion
+//    // https://mvnrepository.com/artifact/org.mybatis/mybatis
+//    implementation group: 'org.mybatis', name: 'mybatis', version: mybatisMapperVersion
+//    // https://mvnrepository.com/artifact/org.mybatis.dynamic-sql/mybatis-dynamic-sql
+//    implementation group: 'org.mybatis.dynamic-sql', name: 'mybatis-dynamic-sql', version: mybatisGeneratorVersion
+//    // https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core
+//    implementation group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: mybatisGeneratorVersion
+//
+//    /**
+//     * cloud 相关配置
+//     */
+//    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-bootstrap
+//    implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
+//    // https://mvnrepository.com/artifact/com.tencent.cloud/spring-cloud-starter-tencent-polaris-discovery
+//    implementation 'com.tencent.cloud:spring-cloud-starter-tencent-polaris-discovery'
+////    implementation 'org.springframework.cloud:spring-cloud-starter-zookeeper-discovery'
+//
+//    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+//    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//}
+//
+//tasks.withType(KotlinCompile) {
+//    kotlinOptions {
+//        freeCompilerArgs = ['-Xjsr305=strict']
+//        jvmTarget = '17'
+//    }
+//}
+//
+//test.finalizedBy(jacocoTestReport)
+//
+//jacoco {
+//    // You may modify the Jacoco version here
+//    toolVersion = "0.8.8"
+//}
+//
+//jacocoTestReport {
+//    // Adjust the output of the test report
+//    reports {
+//        xml.enabled true
+//        html.enabled true
+//    }
+//}
+//
+//
+//test {
+//    useJUnitPlatform()
+//
+//    jacoco {
+//        destinationFile = file("${buildDir}/jacoco/test.exec")
+//    }
+//}
+//
+//// https://cwlab.hatenablog.jp/entry/2019/12/18/233216
+//
+//
+//configurations {
+//    mybatisGenerator
+//}
+//
+//dependencies {
+//    mybatisGenerator group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: mybatisGeneratorVersion
+//    mybatisGenerator group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: mariadbConnectorJavaVersion
+////    mybatisGenerator group: 'tk.mybatis', name: 'mapper', version: mybatisMapperVersion
+//}
+//
+//
+//task mybatisGenerator {
+//    doLast {
+//        ant.taskdef(name: 'mbgenerator', classname: 'org.mybatis.generator.ant.GeneratorAntTask', classpath: configurations.mybatisGenerator.asPath)
+//        ant.mbgenerator(overwrite: true, configfile: 'src/main/resources/generatorConfig.xml', verbose: true)
+//    }
+//}
 
-plugins {
-    id 'org.springframework.boot' version '3.0.1'
-    id 'io.spring.dependency-management' version '1.1.0'
-    id 'org.graalvm.buildtools.native' version '0.9.18'
-    id 'org.jetbrains.kotlin.jvm' version '1.7.22'
-    id 'org.jetbrains.kotlin.plugin.spring' version '1.7.22'
-}
-
-// https://kevcodez.de/posts/2018-08-19-test-coverage-in-kotlin-with-jacoco/
-apply plugin: 'jacoco'
-
-group = 'dev.yidafu.pan.component'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
-
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
-
-repositories {
-
-    maven {
-        url "https://maven.aliyun.com/nexus/content/groups/public/"
-    }
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
-    implementation 'org.jetbrains.kotlin:kotlin-reflect'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-
-    // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
-    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.1.0'
-    // https://mvnrepository.com/artifact/org.mybatis/mybatis
-    implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.11'
-    // https://mvnrepository.com/artifact/org.mybatis.dynamic-sql/mybatis-dynamic-sql
-    implementation group: 'org.mybatis.dynamic-sql', name: 'mybatis-dynamic-sql', version: '1.4.1'
-    // https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core
-    implementation group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: '1.4.1'
-
-
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-}
-
-tasks.withType(KotlinCompile) {
-    kotlinOptions {
-        freeCompilerArgs = ['-Xjsr305=strict']
-        jvmTarget = '17'
-    }
-}
-
-test.finalizedBy(jacocoTestReport)
-
-jacoco {
-    // You may modify the Jacoco version here
-    toolVersion = "0.8.8"
-}
-
-jacocoTestReport {
-    // Adjust the output of the test report
-    reports {
-        xml.enabled true
-        html.enabled true
-    }
-}
-
-
-test {
-    useJUnitPlatform()
-
-    jacoco {
-        destinationFile = file("${buildDir}/jacoco/test.exec")
-    }
-}
-
-// https://cwlab.hatenablog.jp/entry/2019/12/18/233216
-ext {
-    mybatisMapperVersion = '4.1.5'
-    mybatisGeneratorVersion = '1.4.1'
-    mariadbConnectorJavaVersion = '3.1.0'
-}
-
-configurations {
-    mybatisGenerator
-}
-
-dependencies {
-    mybatisGenerator group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: mybatisGeneratorVersion
-    mybatisGenerator group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: mariadbConnectorJavaVersion
-//    mybatisGenerator group: 'tk.mybatis', name: 'mapper', version: mybatisMapperVersion
-}
-
-
-task mybatisGenerator {
-    doLast {
-        ant.taskdef(name: 'mbgenerator', classname: 'org.mybatis.generator.ant.GeneratorAntTask', classpath: configurations.mybatisGenerator.asPath)
-        ant.mbgenerator(overwrite: true, configfile: 'src/main/resources/generatorConfig.xml', verbose: true)
-    }
-}
+dependencies {}

@@ -8,8 +8,8 @@ import org.springframework.boot.runApplication
  * https://blog.csdn.net/weixin_43118901/article/details/109153215
  */
 @SpringBootApplication
-class DemoApplication
+class NonstickPanComponentApplication
 
 fun main(args: Array<String>) {
-    runApplication<DemoApplication>(*args)
+    runApplication<NonstickPanComponentApplication>(*args)
 }

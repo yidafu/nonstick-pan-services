@@ -1,6 +1,7 @@
 # Nonstick Pan Services
 
 
+[![coverage report](http://gitlab.yidafu.net/pan/nonstick-pan-services/badges/main/coverage.svg)](http://gitlab.yidafu.net/pan/nonstick-pan-services/-/commits/main)
 
 ## Getting started
 

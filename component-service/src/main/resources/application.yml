@@ -8,12 +8,12 @@ spring:
     url: jdbc:mariadb://127.0.0.1:3306/visualization_screen?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&characterEncoding=utf8
     username: root
     password: ydf123456
-  namespace: pan
-  address: grpc://127.0.0.1:8091
-  discovery:
-    register:
-      enable: true
-    stat:
-      enabled: true
-      port: 28082
-
+  cloud:
+    polaris:
+      namespace: pan # 配置注册命名空间
+      address: grpc://127.0.0.1:8091
+      discovery:
+        enabled: true
+      stat:
+        enabled: true
+        port: 28082
