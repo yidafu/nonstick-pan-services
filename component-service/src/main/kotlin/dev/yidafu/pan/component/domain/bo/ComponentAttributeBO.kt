@@ -1,6 +1,7 @@
 package dev.yidafu.pan.component.domain.bo
 
 class ComponentAttributeBO {
-    var valueType: Int? = null
-    var valueStore: Map<String, String>? = null
+    var valueType: Byte? = null
+    var attr: String? = null;
+    var value: String? = null;
 }

@@ -3,10 +3,13 @@ package dev.yidafu.pan.component.service.impl
 import dev.yidafu.pan.component.common.exception.attribute.ComponentAttributeCreateFialException
 import dev.yidafu.pan.component.common.exception.attribute.IllegalComponentAttributeOwnerException
 import dev.yidafu.pan.component.common.exception.attribute.NonexistentComponentAttributeException
+import dev.yidafu.pan.component.common.json.JsonValue
 import dev.yidafu.pan.component.convertor.ComponentAttributeConvertor
+import dev.yidafu.pan.component.convertor.ComponentConvertor
 import dev.yidafu.pan.component.domain.mapper.*
 import dev.yidafu.pan.component.domain.dto.SaveComponentAttributeDTO
 import dev.yidafu.pan.component.domain.dto.UpdateComponentAttributeDTO
+import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO
 import dev.yidafu.pan.component.domain.mapper.ComponentAttributeDynamicSqlSupport.componentAttribute
 import dev.yidafu.pan.component.domain.model.ComponentAttribute
 import dev.yidafu.pan.component.service.ComponentAttributeService
@@ -19,7 +22,7 @@ import java.util.function.Predicate
 import java.util.stream.Collectors
 
 @Service
-class ComponentAttributeImpl : ComponentAttributeService {
+class ComponentAttributeServiceImpl : ComponentAttributeService {
     @Autowired
     var mapper: ComponentAttributeMapper? = null
 
@@ -42,12 +45,14 @@ class ComponentAttributeImpl : ComponentAttributeService {
         } ?: throw NonexistentComponentAttributeException();
     }
 
-    override fun findAllByOwner(ownerId: Long): List<ComponentAttribute> {
-        return mapper?.select {
+    override fun findAllByOwner(ownerId: Long): Map<String, JsonValue> {
+        val attrList = mapper?.select {
             where {
                 componentAttribute.ownerId isEqualTo ownerId
             }
         } ?: Collections.emptyList();
+
+        return attrList.associate { it.attr!! to JsonValue(it.valueType, it.value) };
     }
 
     override fun createOne(dto: SaveComponentAttributeDTO): ComponentAttribute {
@@ -58,7 +63,7 @@ class ComponentAttributeImpl : ComponentAttributeService {
         return attr ?: throw ComponentAttributeCreateFialException()
     }
 
-    override fun batchCreate(list: List<SaveComponentAttributeDTO>): List<ComponentAttribute> {
+    override fun batchCreate(list: List<SaveComponentAttributeDTO>): Map<String, JsonValue> {
         val ownerId: Long = list[0].ownerId ?: throw IllegalComponentAttributeOwnerException();
 
         val isTheSomeOwner = list.stream()
@@ -72,15 +77,19 @@ class ComponentAttributeImpl : ComponentAttributeService {
         return findAllByOwner(ownerId)
     }
 
-    override fun updateByAttr(attr: String, value: String): ComponentAttribute {
+    override fun updateByAttr(dto: UpdateComponentAttributeDTO): ComponentAttribute {
+        if (null == dto.attr || null == dto.value || null == dto.valueType || null == dto.ownerId) {
+            throw  IllegalArgumentException("Update Component Attribute data must not be null");
+        }
         mapper!!.update {
-            set(componentAttribute.value).equalTo(value)
+            set(componentAttribute.value).equalTo(dto.value!!)
             where {
-                componentAttribute.attr isEqualTo attr
+                componentAttribute.attr isEqualTo dto.attr!!
+                componentAttribute.ownerId isEqualTo dto.ownerId!!
             }
         }
 
-        return findOneByAttr(attr)
+        return findOneByAttr(dto.attr!!)
     }
 
     override fun updateById(id: Long, value: String): ComponentAttribute {
@@ -94,12 +103,11 @@ class ComponentAttributeImpl : ComponentAttributeService {
     }
 
     override fun batchUpdateAttr(list: List<UpdateComponentAttributeDTO>): List<ComponentAttribute> {
-
         return list.stream()
             .map(Function<UpdateComponentAttributeDTO, ComponentAttribute> { dto: UpdateComponentAttributeDTO ->
                 if (dto.attr != null && dto.value != null) {
-                    updateByAttr(dto.attr, dto.value);
-                    findOneByAttr(dto.attr)
+                    updateByAttr(dto);
+                    findOneByAttr(dto.attr!!)
                 } else {
                     null
                 }

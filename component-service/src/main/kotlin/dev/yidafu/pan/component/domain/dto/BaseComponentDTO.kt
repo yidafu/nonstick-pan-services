@@ -1,5 +1,9 @@
 package dev.yidafu.pan.component.domain.dto
 
+import com.fasterxml.jackson.databind.node.ObjectNode
+import dev.yidafu.pan.component.common.json.JsonUtils
+
+
 open class BaseComponentDTO {
     val screenId: Long? = null
     val groupId: Long? = null
@@ -16,8 +20,8 @@ open class BaseComponentDTO {
     val category: String? = null
     val subCategory: String? = null
     val umdJsUrl: String? = null
-    val styleLabelConfig: String? = null
-    val styleConfig: String? = null
-    val requestConfig: String? = null
-    val interactConfig: String? = null
+    val styleLabelConfig: ObjectNode = JsonUtils.createObject()
+    val styleConfig: ObjectNode = JsonUtils.createObject()
+    val requestConfig: ObjectNode = JsonUtils.createObject()
+    val interactConfig: ObjectNode = JsonUtils.createObject()
 }

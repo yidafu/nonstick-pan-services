@@ -1,6 +1,8 @@
 package dev.yidafu.pan.component.domain.dto
 
-class UpdateComponentAttributeDTO {
-    val attr: String? = null
-    val value: String? = null
-}
+class UpdateComponentAttributeDTO(
+    var ownerId: Long?,
+    var attr: String?,
+    var valueType: Byte?,
+    var value: String?
+)

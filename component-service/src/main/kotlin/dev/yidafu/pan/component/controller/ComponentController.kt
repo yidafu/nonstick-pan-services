@@ -28,7 +28,10 @@ class ComponentController {
 
     @PostMapping("/component")
     fun createOne(@RequestBody dto: SaveComponentDTO?): ComponentVO? {
-        return dto?.let { componentService!!.createOne(it) }
+        if (null == dto) {
+            throw IllegalArgumentException("Create Component data must not be Null")
+        }
+        return componentService!!.createOne(dto)
     }
 
     @PutMapping("/component/{id}")

@@ -6,7 +6,6 @@ import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.created
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.groupId
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.height
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.id
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.interactConfig
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.isGroup
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.isLock
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.isLockAspectRatio
@@ -14,10 +13,7 @@ import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.layerNa
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.name
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.offsetX
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.offsetY
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.requestConfig
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.screenId
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.styleConfig
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.styleLabelConfig
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.subCategory
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.umdJsUrl
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.updatedAt
@@ -82,11 +78,7 @@ interface ComponentMapper : CommonCountMapper, CommonDeleteMapper, CommonUpdateM
         Result(column="sub_category", property="subCategory", jdbcType=JdbcType.VARCHAR),
         Result(column="umd_js_url", property="umdJsUrl", jdbcType=JdbcType.VARCHAR),
         Result(column="created_at", property="createdAt", jdbcType=JdbcType.TIMESTAMP),
-        Result(column="updated_at", property="updatedAt", jdbcType=JdbcType.TIMESTAMP),
-        Result(column="style_label_config", property="styleLabelConfig", jdbcType=JdbcType.LONGVARCHAR),
-        Result(column="style_config", property="styleConfig", jdbcType=JdbcType.LONGVARCHAR),
-        Result(column="request_config", property="requestConfig", jdbcType=JdbcType.LONGVARCHAR),
-        Result(column="interact_config", property="interactConfig", jdbcType=JdbcType.LONGVARCHAR)
+        Result(column="updated_at", property="updatedAt", jdbcType=JdbcType.TIMESTAMP)
     ])
     fun selectMany(selectStatement: SelectStatementProvider): List<Component>
 
@@ -125,10 +117,6 @@ fun ComponentMapper.insert(row: Component) =
         map(umdJsUrl) toProperty "umdJsUrl"
         map(createdAt) toProperty "createdAt"
         map(updatedAt) toProperty "updatedAt"
-        map(styleLabelConfig) toProperty "styleLabelConfig"
-        map(styleConfig) toProperty "styleConfig"
-        map(requestConfig) toProperty "requestConfig"
-        map(interactConfig) toProperty "interactConfig"
     }
 
 fun ComponentMapper.insertMultiple(records: Collection<Component>) =
@@ -150,10 +138,6 @@ fun ComponentMapper.insertMultiple(records: Collection<Component>) =
         map(umdJsUrl) toProperty "umdJsUrl"
         map(createdAt) toProperty "createdAt"
         map(updatedAt) toProperty "updatedAt"
-        map(styleLabelConfig) toProperty "styleLabelConfig"
-        map(styleConfig) toProperty "styleConfig"
-        map(requestConfig) toProperty "requestConfig"
-        map(interactConfig) toProperty "interactConfig"
     }
 
 fun ComponentMapper.insertMultiple(vararg records: Component) =
@@ -178,13 +162,9 @@ fun ComponentMapper.insertSelective(row: Component) =
         map(umdJsUrl).toPropertyWhenPresent("umdJsUrl", row::umdJsUrl)
         map(createdAt).toPropertyWhenPresent("createdAt", row::createdAt)
         map(updatedAt).toPropertyWhenPresent("updatedAt", row::updatedAt)
-        map(styleLabelConfig).toPropertyWhenPresent("styleLabelConfig", row::styleLabelConfig)
-        map(styleConfig).toPropertyWhenPresent("styleConfig", row::styleConfig)
-        map(requestConfig).toPropertyWhenPresent("requestConfig", row::requestConfig)
-        map(interactConfig).toPropertyWhenPresent("interactConfig", row::interactConfig)
     }
 
-private val columnList = listOf(id, screenId, groupId, name, layerName, isGroup, width, height, offsetX, offsetY, zIndex, isLock, isLockAspectRatio, category, subCategory, umdJsUrl, createdAt, updatedAt, styleLabelConfig, styleConfig, requestConfig, interactConfig)
+private val columnList = listOf(id, screenId, groupId, name, layerName, isGroup, width, height, offsetX, offsetY, zIndex, isLock, isLockAspectRatio, category, subCategory, umdJsUrl, createdAt, updatedAt)
 
 fun ComponentMapper.selectOne(completer: SelectCompleter) =
     selectOne(this::selectOne, columnList, component, completer)
@@ -222,10 +202,6 @@ fun KotlinUpdateBuilder.updateAllColumns(row: Component) =
         set(umdJsUrl) equalToOrNull row::umdJsUrl
         set(createdAt) equalToOrNull row::createdAt
         set(updatedAt) equalToOrNull row::updatedAt
-        set(styleLabelConfig) equalToOrNull row::styleLabelConfig
-        set(styleConfig) equalToOrNull row::styleConfig
-        set(requestConfig) equalToOrNull row::requestConfig
-        set(interactConfig) equalToOrNull row::interactConfig
     }
 
 fun KotlinUpdateBuilder.updateSelectiveColumns(row: Component) =
@@ -247,10 +223,6 @@ fun KotlinUpdateBuilder.updateSelectiveColumns(row: Component) =
         set(umdJsUrl) equalToWhenPresent row::umdJsUrl
         set(createdAt) equalToWhenPresent row::createdAt
         set(updatedAt) equalToWhenPresent row::updatedAt
-        set(styleLabelConfig) equalToWhenPresent row::styleLabelConfig
-        set(styleConfig) equalToWhenPresent row::styleConfig
-        set(requestConfig) equalToWhenPresent row::requestConfig
-        set(interactConfig) equalToWhenPresent row::interactConfig
     }
 
 fun ComponentMapper.updateByPrimaryKey(row: Component) =
@@ -272,10 +244,6 @@ fun ComponentMapper.updateByPrimaryKey(row: Component) =
         set(umdJsUrl) equalToOrNull row::umdJsUrl
         set(createdAt) equalToOrNull row::createdAt
         set(updatedAt) equalToOrNull row::updatedAt
-        set(styleLabelConfig) equalToOrNull row::styleLabelConfig
-        set(styleConfig) equalToOrNull row::styleConfig
-        set(requestConfig) equalToOrNull row::requestConfig
-        set(interactConfig) equalToOrNull row::interactConfig
         where { id isEqualTo row.id!! }
     }
 
@@ -298,9 +266,5 @@ fun ComponentMapper.updateByPrimaryKeySelective(row: Component) =
         set(umdJsUrl) equalToWhenPresent row::umdJsUrl
         set(createdAt) equalToWhenPresent row::createdAt
         set(updatedAt) equalToWhenPresent row::updatedAt
-        set(styleLabelConfig) equalToWhenPresent row::styleLabelConfig
-        set(styleConfig) equalToWhenPresent row::styleConfig
-        set(requestConfig) equalToWhenPresent row::requestConfig
-        set(interactConfig) equalToWhenPresent row::interactConfig
         where { id isEqualTo row.id!! }
     }
