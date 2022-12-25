@@ -1,4 +1,4 @@
-package dev.yidafu.pan.component.domain.entity
+package dev.yidafu.pan.component.domain.model
 
 import java.io.Serializable
 import java.util.Date

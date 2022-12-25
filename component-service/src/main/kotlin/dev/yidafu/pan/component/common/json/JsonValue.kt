@@ -1,6 +1,6 @@
 package dev.yidafu.pan.component.common.json
 
-import dev.yidafu.pan.component.common.exception.UnknownJsonValueTypeException
+import dev.yidafu.pan.component.common.exception.json.UnknownJsonValueTypeException
 //import lombok.AllArgsConstructor
 
 //@AllArgsConstructor

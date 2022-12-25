@@ -1,26 +1,23 @@
-//package dev.yidafu.pan.component.domain.dto
-//
-//import lombok.Data
-//
-//@Data
-//open class BaseComponentDTO {
-//    private val screenId: Long? = null
-//    private val groupId: Long? = null
-//    private val name: String? = null
-//    private val layerName: String? = null
-//    private val isGroup: Byte? = null
-//    private val width: Int? = null
-//    private val height: Int? = null
-//    private val offsetX: Int? = null
-//    private val offsetY: Int? = null
-//    private val zIndex: Int? = null
-//    private val isLock: Byte? = null
-//    private val isLockAspectRatio: Byte? = null
-//    private val category: String? = null
-//    private val subCategory: String? = null
-//    private val umdJsUrl: String? = null
-//    private val styleLabelConfig: String? = null
-//    private val styleConfig: String? = null
-//    private val requestConfig: String? = null
-//    private val interactConfig: String? = null
-//}
+package dev.yidafu.pan.component.domain.dto
+
+open class BaseComponentDTO {
+    val screenId: Long? = null
+    val groupId: Long? = null
+    val name: String? = null
+    val layerName: String? = null
+    val isGroup: Byte? = null
+    val width: Int? = null
+    val height: Int? = null
+    val offsetX: Int? = null
+    val offsetY: Int? = null
+    val zIndex: Int? = null
+    val isLock: Byte? = null
+    val isLockAspectRatio: Byte? = null
+    val category: String? = null
+    val subCategory: String? = null
+    val umdJsUrl: String? = null
+    val styleLabelConfig: String? = null
+    val styleConfig: String? = null
+    val requestConfig: String? = null
+    val interactConfig: String? = null
+}

@@ -1,11 +1,8 @@
-//package dev.yidafu.pan.component.domain.dto
-//
-//import lombok.Data
-//
-//@Data
-//class SaveComponentAttributeDTO {
-//    private val ownerId: Long? = null
-//    private val attr: String? = null
-//    private val valueType: Byte? = null
-//    private val value: String? = null
-//}
+package dev.yidafu.pan.component.domain.dto
+
+data class SaveComponentAttributeDTO(
+    var ownerId: Long?,
+    var attr: String?,
+    var valueType: Byte?,
+    var value: String?
+)

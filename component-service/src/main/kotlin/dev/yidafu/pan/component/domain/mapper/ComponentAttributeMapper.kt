@@ -1,14 +1,14 @@
-package dev.yidafu.pan.component.domain.dao
+package dev.yidafu.pan.component.domain.mapper
 
-import dev.yidafu.pan.component.domain.dao.ComponentAttributeDynamicSqlSupport.attr
-import dev.yidafu.pan.component.domain.dao.ComponentAttributeDynamicSqlSupport.componentAttribute
-import dev.yidafu.pan.component.domain.dao.ComponentAttributeDynamicSqlSupport.createdAt
-import dev.yidafu.pan.component.domain.dao.ComponentAttributeDynamicSqlSupport.id
-import dev.yidafu.pan.component.domain.dao.ComponentAttributeDynamicSqlSupport.ownerId
-import dev.yidafu.pan.component.domain.dao.ComponentAttributeDynamicSqlSupport.updatedAt
-import dev.yidafu.pan.component.domain.dao.ComponentAttributeDynamicSqlSupport.value
-import dev.yidafu.pan.component.domain.dao.ComponentAttributeDynamicSqlSupport.valueType
-import dev.yidafu.pan.component.domain.entity.ComponentAttribute
+import dev.yidafu.pan.component.domain.mapper.ComponentAttributeDynamicSqlSupport.attr
+import dev.yidafu.pan.component.domain.mapper.ComponentAttributeDynamicSqlSupport.componentAttribute
+import dev.yidafu.pan.component.domain.mapper.ComponentAttributeDynamicSqlSupport.createdAt
+import dev.yidafu.pan.component.domain.mapper.ComponentAttributeDynamicSqlSupport.id
+import dev.yidafu.pan.component.domain.mapper.ComponentAttributeDynamicSqlSupport.ownerId
+import dev.yidafu.pan.component.domain.mapper.ComponentAttributeDynamicSqlSupport.updatedAt
+import dev.yidafu.pan.component.domain.mapper.ComponentAttributeDynamicSqlSupport.value
+import dev.yidafu.pan.component.domain.mapper.ComponentAttributeDynamicSqlSupport.valueType
+import dev.yidafu.pan.component.domain.model.ComponentAttribute
 import org.apache.ibatis.annotations.InsertProvider
 import org.apache.ibatis.annotations.Mapper
 import org.apache.ibatis.annotations.Options

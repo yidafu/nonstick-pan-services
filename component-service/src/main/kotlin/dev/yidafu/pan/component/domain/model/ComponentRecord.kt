@@ -1,9 +1,8 @@
-package dev.yidafu.pan.component.domain.entity
+package dev.yidafu.pan.component.domain.model
 
-import java.io.Serializable
 import java.util.Date
 
-data class Component(
+data class ComponentRecord(
     var id: Long? = null,
     var screenId: Long? = null,
     var groupId: Long? = null,
@@ -26,4 +25,4 @@ data class Component(
     var styleConfig: String? = null,
     var requestConfig: String? = null,
     var interactConfig: String? = null
-) : Serializable
+)

@@ -1,4 +1,4 @@
-package dev.yidafu.pan.component.domain.dao
+package dev.yidafu.pan.component.domain.mapper
 
 import java.sql.JDBCType
 import java.util.Date
