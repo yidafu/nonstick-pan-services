@@ -1,14 +1,37 @@
-image: maven:3-eclipse-temurin-19
+image: gradle:jdk19
 
 stages:
   - test
+  - visualize
+  - build
 
-default:
-  interruptible: false
-  before_script:
-    - cp ./settings.xml /root/.m2/settings.xml
-
-component_maven_test:
+gradle_test:
   stage: test
   script:
-    - cd component-service && mvn clean test
+    - gradle clean check test
+  artifacts:
+    paths:
+      - component-service/build/reports/jacoco/test/jacocoTestReport.xml
+
+# https://docs.gitlab.com/ee/ci/testing/test_coverage_visualization.html#gradle-example
+coverage_visualize:
+  # Must be in a stage later than test-jdk11's stage.
+  # The `visualize` stage does not exist by default.
+  # Please define it first, or chose an existing stage like `deploy`.
+  stage: visualize
+  image: registry.gitlab.com/haynes/jacoco2cobertura:1.0.7
+  script:
+    - mkdir build/
+    # convert report from jacoco to cobertura, using relative project path
+    - python /opt/cover2cover.py component-service/build/reports/jacoco/test/jacocoTestReport.xml $CI_PROJECT_DIR/component-service/src/main/kotlin/ > build/cobertura.xml
+  needs: ["gradle_test"]
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: build/cobertura.xml
+
+gradle_build:
+  stage: build
+  script:
+    - gradle check jar
