@@ -1,0 +1,3 @@
+package dev.yidafu.pan.component.common.exception
+
+class IllegalComponentAttributeOwnerException : ServiceException(ExpectionCode.IllegalComponentAttributeOwner)

@@ -1,0 +1,79 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    id 'org.springframework.boot' version '3.0.1'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'org.graalvm.buildtools.native' version '0.9.18'
+    id 'org.jetbrains.kotlin.jvm' version '1.7.22'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.7.22'
+}
+
+group = 'dev.yidafu.pan.component'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+
+    // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.1.0'
+    // https://mvnrepository.com/artifact/org.mybatis/mybatis
+    implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.11'
+    // https://mvnrepository.com/artifact/org.mybatis.dynamic-sql/mybatis-dynamic-sql
+    implementation group: 'org.mybatis.dynamic-sql', name: 'mybatis-dynamic-sql', version: '1.4.1'
+    // https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core
+    implementation group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: '1.4.1'
+
+
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.withType(KotlinCompile) {
+    kotlinOptions {
+        freeCompilerArgs = ['-Xjsr305=strict']
+        jvmTarget = '17'
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+// https://cwlab.hatenablog.jp/entry/2019/12/18/233216
+ext {
+    mybatisMapperVersion = '4.1.5'
+    mybatisGeneratorVersion = '1.4.1'
+    mariadbConnectorJavaVersion = '3.1.0'
+}
+configurations {
+    mybatisGenerator
+}
+
+dependencies {
+    mybatisGenerator group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: mybatisGeneratorVersion
+    mybatisGenerator group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: mariadbConnectorJavaVersion
+//    mybatisGenerator group: 'tk.mybatis', name: 'mapper', version: mybatisMapperVersion
+}
+
+
+task mybatisGenerator {
+    doLast {
+        ant.taskdef(name: 'mbgenerator', classname: 'org.mybatis.generator.ant.GeneratorAntTask', classpath: configurations.mybatisGenerator.asPath)
+        ant.mbgenerator(overwrite: true, configfile: 'src/main/resources/generatorConfig.xml', verbose: true)
+    }
+}
