@@ -1,0 +1,2 @@
+rootProject.name = 'NonstckpanService'
+include "component-service"
