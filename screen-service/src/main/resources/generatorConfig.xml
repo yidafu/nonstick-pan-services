@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 配置 tableName,使用 Run As Maven build 生成 dao 层 -->
+<generatorConfiguration>
+    <!-- 配置文件路径 -->
+<!--    <properties resource="application.yml"/>-->
+    <!--数据库驱动包路径 -->
+<!--    <classPathEntry locatzion="~/.m2/repository/org/mariadb/jdbc/mariadb-java-client/3.1.0/mariadb-java-client-3.1.0.jar"/>-->
+
+    <!-- flat表示为每一张表只生成一个实体类。这个实体类包含表中的所有字段-->
+    <context id="kotlin" targetRuntime="MyBatis3Kotlin">
+        <!-- 生成的Java文件的编码 -->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!-- 格式化java代码 -->
+        <property name="javaFormatter"
+                  value="org.mybatis.generator.api.dom.DefaultJavaFormatter"/>
+        <!-- 格式化XML代码 -->
+        <property name="xmlFormatter"
+                  value="org.mybatis.generator.api.dom.DefaultXmlFormatter"/>
+        <!-- 抑制警告 -->
+        <property name="suppressTypeWarnings" value="true"/>
+        <!-- generate entity时，生成serialVersionUID -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!--关闭注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
+            <property name="suppressDate" value="true"/> <!-- 是否生成注释代时间戳 -->
+        </commentGenerator>
+
+        <!--数据库连接信息 -->
+        <jdbcConnection driverClass="org.mariadb.jdbc.Driver"
+                        connectionURL="jdbc:mariadb://127.0.0.1:3306/visualization_screen?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;useSSL=false&amp;characterEncoding=utf8"
+                        userId="root"
+                        password="ydf123456">
+        </jdbcConnection>
+
+
+        <!--生成的model 包路径 -->
+        <javaModelGenerator targetPackage="dev.yidafu.pan.screen.domain.model"
+                            targetProject="src/main/kotlin">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+
+        <!-- 生成的Dao接口 的包路径 -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="dev.yidafu.pan.screen.domain.mapper"
+                             targetProject="src/main/kotlin">
+        </javaClientGenerator>
+
+        <!--生成全部的表-->
+        <table tableName="vs_screen"
+               domainObjectName="Screen"
+               sqlProviderName="ScreenProvider"
+               mapperName="ScreenMapper">
+            <generatedKey column="id" sqlStatement="JDBC" identity="true" type="post"/>
+        </table>
+    </context>
+</generatorConfiguration>

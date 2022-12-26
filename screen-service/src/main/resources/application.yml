@@ -1,0 +1,28 @@
+server:
+    port: 8202
+spring:
+  application:
+    name: "PanScreenService"
+  datasource:
+    java-class-driver: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/visualization_screen?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false&characterEncoding=utf8
+    username: root
+    password: ydf123456
+  cloud:
+    polaris:
+      namespace: pan # 配置注册命名空间
+      address: grpc://127.0.0.1:8091
+      discovery:
+        enabled: true
+      stat:
+        enabled: true
+        port: 28082
+
+log4j:
+  logger:
+    dev:
+      yidafu:
+        pan:
+          component:
+            domain:
+              mapper: DEBUG
