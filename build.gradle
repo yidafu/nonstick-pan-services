@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 /**
  * https://developer.aliyun.com/article/953691
  * https://kevcodez.de/posts/2018-08-19-test-coverage-in-kotlin-with-jacoco/
+ * https://github.com/mapstruct/mapstruct-examples/blob/main/mapstruct-kotlin-gradle/build.gradle.kts
+ * https://www.appsloveworld.com/kotlin/100/25/mapstruct-not-autowiring-with-kotlin-and-spring-boot-built-using-gradle
  **/
 
 /*
@@ -14,6 +16,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 buildscript {
     ext {
         mybatisMapperVersion = '3.5.11'
+        mybatisStringStartVersion = '3.0.1'
         mybatisGeneratorVersion = '1.4.1'
         mariadbConnectorJavaVersion = '3.1.0'
         springCloudDependencies = '2022.0.0'
@@ -52,6 +55,7 @@ plugins {
     id 'org.graalvm.buildtools.native' version '0.9.18'
     id 'org.jetbrains.kotlin.jvm' version '1.7.22'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.7.22'
+    id "org.jetbrains.kotlin.kapt" version '1.7.22'
 }
 
 allprojects {
@@ -61,6 +65,7 @@ allprojects {
     apply plugin: 'org.graalvm.buildtools.native'
     apply plugin: 'org.jetbrains.kotlin.plugin.spring'
     apply plugin: 'org.jetbrains.kotlin.jvm'
+    apply plugin: 'org.jetbrains.kotlin.kapt'
 
     //这个插件用于发布jar包到私服
     apply plugin: 'maven-publish'
@@ -109,6 +114,7 @@ subprojects {
     apply plugin: 'org.graalvm.buildtools.native'
     apply plugin: 'org.jetbrains.kotlin.plugin.spring'
     apply plugin: 'org.jetbrains.kotlin.jvm'
+    apply plugin: 'org.jetbrains.kotlin.kapt'
 
     group = 'dev.yidafu.pan'
     version = '0.0.1-SNAPSHOT'
@@ -138,13 +144,27 @@ subprojects {
 
     /* 添加通用依赖 */
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+        /**
+         * kotlin 依赖
+         */
         implementation 'org.jetbrains.kotlin:kotlin-reflect'
         implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
+        /**
+         * spring 相关依赖
+         */
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+        compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+        kapt 'org.springframework.boot:spring-boot-configuration-processor'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+        implementation 'org.apache.logging.log4j:log4j-api:2.19.0'
+        implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
+        implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+        // mapstruct
         implementation "org.mapstruct:mapstruct:${mapstructVersion}"
-        annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+        kapt "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
         // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
         implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: mariadbConnectorJavaVersion
@@ -154,6 +174,8 @@ subprojects {
         implementation group: 'org.mybatis.dynamic-sql', name: 'mybatis-dynamic-sql', version: mybatisGeneratorVersion
         // https://mvnrepository.com/artifact/org.mybatis.generator/mybatis-generator-core
         implementation group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: mybatisGeneratorVersion
+        // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
+        implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: mybatisStringStartVersion
 
         /**
          * cloud 相关配置
@@ -164,9 +186,16 @@ subprojects {
         implementation 'com.tencent.cloud:spring-cloud-starter-tencent-polaris-discovery'
 //        implementation 'org.springframework.cloud:spring-cloud-starter-zookeeper-discovery'
 
-        developmentOnly 'org.springframework.boot:spring-boot-devtools'
-        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    kapt {
+        arguments {
+//            keepJavacAnnotationProcessors = true
+            // Set Mapstruct Configuration options here
+            // https://kotlinlang.org/docs/reference/kapt.html#annotation-processor-arguments
+            // https://mapstruct.org/documentation/stable/reference/html/#configuration-options
+             arg("mapstruct.defaultComponentModel", "spring")
+        }
     }
 
     tasks.withType(KotlinCompile) {

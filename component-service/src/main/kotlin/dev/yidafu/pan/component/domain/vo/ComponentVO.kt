@@ -1,28 +1,29 @@
 package dev.yidafu.pan.component.domain.vo
 
+import com.fasterxml.jackson.databind.node.ObjectNode
 import java.sql.Date
 
 class ComponentVO {
-    private val id: Long? = null
-    private val screenId: Long? = null
-    private val groupId: Long? = null
-    private val name: String? = null
-    private val layerName: String? = null
-    private val isGroup: Byte? = null
-    private val width: Int? = null
-    private val height: Int? = null
-    private val offsetX: Int? = null
-    private val offsetY: Int? = null
-    private val zIndex: Int? = null
-    private val isLock: Byte? = null
-    private val isLockAspectRatio: Byte? = null
-    private val category: String? = null
-    private val subCategory: String? = null
-    private val umdJsUrl: String? = null
-    private val createdAt: Date? = null
-    private val updatedAt: Date? = null
-    private val styleLabelConfig: String? = null
-    private val styleConfig: String? = null
-    private val requestConfig: String? = null
-    private val interactConfig: String? = null
+    var id: Long? = null
+    var screenId: Long? = null
+    var groupId: Long? = null
+    var name: String? = null
+    var layerName: String? = null
+    var isGroup: Byte? = null
+    var width: Int? = null
+    var height: Int? = null
+    var offsetX: Int? = null
+    var offsetY: Int? = null
+    var zIndex: Int? = null
+    var isLock: Byte? = null
+    var isLockAspectRatio: Byte? = null
+    var category: String? = null
+    var subCategory: String? = null
+    var umdJsUrl: String? = null
+    var createdAt: Date? = null
+    var updatedAt: Date? = null
+    var styleLabelConfig: ObjectNode? = null
+    var styleConfig: ObjectNode? = null
+    var requestConfig: ObjectNode? = null
+    var interactConfig: ObjectNode? = null
 }

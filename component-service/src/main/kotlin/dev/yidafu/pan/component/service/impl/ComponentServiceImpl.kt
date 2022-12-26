@@ -36,13 +36,23 @@ class ComponentServiceImpl : ComponentService {
 
     override fun findById(id: Long): ComponentVO {
 
-        val component = mapper?.selectOne{
+        val comp = mapper?.selectOne{
             where {
                 component.id isEqualTo id
             }
         }
-        return  component?.let {
-            convertor?.to(it)
+        return  comp?.let { it ->
+            val vo = convertor?.to(it)
+            val attrMap = componentAttributeService?.findAllByOwner(id);
+            val attrObj = attrMap?.let { it1 -> JsonUtils.parseMap(it1) };
+            attrObj?.let {
+                it2 ->
+                vo?.styleConfig = it2.get("styleConfig") as ObjectNode?
+                vo?.requestConfig = it2.get("requestConfig") as ObjectNode?
+                vo?.styleLabelConfig = it2.get("styleLabelConfig") as ObjectNode?
+                vo?.interactConfig = it2.get("interactConfig") as ObjectNode?
+            }
+            vo;
         } ?: throw NonexistentComponentException()
 
     }
@@ -54,8 +64,18 @@ class ComponentServiceImpl : ComponentService {
                 component.screenId isEqualTo screenId
             }
         }
-
-        return componentList?.let { convertor?.to(componentList) } ?: Collections.emptyList()
+        val comIdList = componentList?.filter { it.id != null }?.map { it.id!! } ?: emptyList()
+        val comAttrMap = componentAttributeService?.findAllByOwnerList(comIdList)
+        return componentList
+            ?.let { convertor?.to(componentList) }
+            ?.map {
+                val attrObj = comAttrMap?.get(it.id)?.let { it1 -> JsonUtils.parseMap(it1) }
+                it.styleConfig = attrObj?.get("styleConfig") as ObjectNode?
+                it.requestConfig = attrObj?.get("requestConfig") as ObjectNode?
+                it.styleLabelConfig = attrObj?.get("styleLabelConfig") as ObjectNode?
+                it.interactConfig = attrObj?.get("interactConfig") as ObjectNode?
+                it
+            } ?: Collections.emptyList()
     }
 
     override fun updateById(id: Long, dto: UpdateComponentDTO): ComponentVO {
@@ -74,7 +94,7 @@ class ComponentServiceImpl : ComponentService {
 
     override fun createOne(dto: SaveComponentDTO): ComponentVO {
         val component: Component = convertor!!.from(dto)
-        mapper?.insert(component)
+        val res = mapper?.insertSelective(component)
 
         return component.id?.let {
             val root = JsonUtils.createObject();
@@ -87,17 +107,21 @@ class ComponentServiceImpl : ComponentService {
         } ?: throw ComponentCreateFailException()
     }
 
-    private fun updateComponentAttribute(comId: Long, obj: ObjectNode) {
+    private fun updateComponentAttribute(comId: Long, obj: ObjectNode): ObjectNode {
 
         val oldAttrMap = componentAttributeService?.findAllByOwner(comId) ?: Collections.emptyMap();
 
         val newAttrMap = JsonUtils.toMap(obj);
 
         val diffResult = diffAttrMap(oldAttrMap, newAttrMap);
-
-        componentAttributeService?.batchCreate(attributeConvertor!!.to(comId, diffResult["create"] ?: Collections.emptyMap()))
-        componentAttributeService?.batchUpdateAttr(attributeConvertor!!.toUpdateDTOList(comId, diffResult["update"] ?: Collections.emptyMap()))
+        componentAttributeService?.batchUpdateAttr(ComponentAttributeConvertor.toUpdateDTOList(comId, diffResult["update"] ?: Collections.emptyMap()));
         componentAttributeService?.remoteByAttrs(comId, diffResult["remove"]?.keys?.toList() ?: Collections.emptyList());
+        val lastAttrs = componentAttributeService?.batchCreate(ComponentAttributeConvertor.to(comId, diffResult["create"] ?: Collections.emptyMap()));
+
+        return lastAttrs?.let {
+            JsonUtils.parseMap(it)
+        }
+            ?: JsonUtils.createObject();
     }
 
     private fun diffAttrMap(oldMap: Map<String, JsonValue>, newMap:  Map<String, JsonValue>): Map<String, Map<String, JsonValue>> {

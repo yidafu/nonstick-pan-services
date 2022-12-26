@@ -10,6 +10,8 @@ interface ComponentAttributeService {
     fun findOneById(id: Long): ComponentAttribute
     fun findOneByAttr(attr: String): ComponentAttribute
     fun findAllByOwner(ownerId: Long): Map<String, JsonValue>
+
+    fun findAllByOwnerList(ownerIdList: List<Long>): Map<Long, Map<String, JsonValue>>
     fun createOne(dto: SaveComponentAttributeDTO): ComponentAttribute
     fun batchCreate(list: List<SaveComponentAttributeDTO>): Map<String, JsonValue>
     fun updateByAttr(dto: UpdateComponentAttributeDTO): ComponentAttribute
