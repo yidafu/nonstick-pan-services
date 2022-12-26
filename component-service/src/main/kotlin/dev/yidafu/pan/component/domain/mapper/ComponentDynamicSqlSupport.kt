@@ -44,14 +44,6 @@ object ComponentDynamicSqlSupport {
 
     val updatedAt = component.updatedAt
 
-    val styleLabelConfig = component.styleLabelConfig
-
-    val styleConfig = component.styleConfig
-
-    val requestConfig = component.requestConfig
-
-    val interactConfig = component.interactConfig
-
     class Component : AliasableSqlTable<Component>("vs_component", ::Component) {
         val id = column<Long>(name = "id", jdbcType = JDBCType.BIGINT)
 
@@ -88,13 +80,5 @@ object ComponentDynamicSqlSupport {
         val createdAt = column<Date>(name = "created_at", jdbcType = JDBCType.TIMESTAMP)
 
         val updatedAt = column<Date>(name = "updated_at", jdbcType = JDBCType.TIMESTAMP)
-
-        val styleLabelConfig = column<String>(name = "style_label_config", jdbcType = JDBCType.LONGVARCHAR)
-
-        val styleConfig = column<String>(name = "style_config", jdbcType = JDBCType.LONGVARCHAR)
-
-        val requestConfig = column<String>(name = "request_config", jdbcType = JDBCType.LONGVARCHAR)
-
-        val interactConfig = column<String>(name = "interact_config", jdbcType = JDBCType.LONGVARCHAR)
     }
 }

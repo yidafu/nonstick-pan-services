@@ -56,13 +56,14 @@
                domainObjectName="Component"
                sqlProviderName="ComponentProvider"
                mapperName="ComponentMapper">
-            <generatedKey column="id" sqlStatement="JDBC"/>
+            <generatedKey column="id" sqlStatement="JDBC" identity="true" type="post"/>
         </table>
         <table tableName="vs_component_attribute"
                domainObjectName="ComponentAttribute"
                sqlProviderName="ComponentAttributeProvider"
                mapperName="ComponentAttributeMapper">
-            <generatedKey column="id" sqlStatement="JDBC"/>
+<!--            component_attribute 不需要 插入后返回新增 ID -->
+            <generatedKey column="id" sqlStatement="JDBC" identity="true" type="post"/>
         </table>
     </context>
 </generatorConfiguration>

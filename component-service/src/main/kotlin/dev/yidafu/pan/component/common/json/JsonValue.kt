@@ -5,21 +5,26 @@ import dev.yidafu.pan.component.common.exception.json.UnknownJsonValueTypeExcept
 
 //@AllArgsConstructor
 //@NoArgsConstructor
-class JsonValue(valueType: Byte, value: String) {
+class JsonValue(valueType: Byte?, value: String?) {
     var valueType: JsonValueType? = null
     var value: String
 
     init {
-        if (valueType.toInt() == JsonValueType.String.ordinal) {
+        if (valueType?.toInt() == JsonValueType.String.ordinal) {
             this.valueType = JsonValueType.String
-        } else if (valueType.toInt() == JsonValueType.Number.ordinal) {
+        } else if (valueType?.toInt() == JsonValueType.Number.ordinal) {
             this.valueType = JsonValueType.Number
-        } else if (valueType.toInt() == JsonValueType.Boolean.ordinal) {
+        } else if (valueType?.toInt() == JsonValueType.Boolean.ordinal) {
             this.valueType = JsonValueType.Boolean
         } else {
             throw UnknownJsonValueTypeException()
         }
-        this.value = value
+        if (null == value) {
+            this.valueType = JsonValueType.Null;
+            this.value = "null"
+        } else {
+            this.value = value
+        }
     }
 
     val isString: Boolean
@@ -39,6 +44,14 @@ class JsonValue(valueType: Byte, value: String) {
 
     fun getBoolean(): Boolean {
         return java.lang.Boolean.parseBoolean(value)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true;
+        if (other is JsonValue) {
+            return valueType == other.valueType && value == other.value;
+        }
+        return false;
     }
 
     companion object {

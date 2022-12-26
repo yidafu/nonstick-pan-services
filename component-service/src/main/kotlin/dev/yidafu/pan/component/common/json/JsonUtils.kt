@@ -11,6 +11,11 @@ import org.slf4j.LoggerFactory
 object JsonUtils {
     private val logger = LoggerFactory.getLogger(JsonUtils::class.java)
     private val objectMapper = ObjectMapper()
+
+    fun createObject(): ObjectNode {
+        return objectMapper.createObjectNode();
+    }
+
     @Throws(JsonProcessingException::class)
     fun object2String(node: ObjectNode?): String {
         return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(node)

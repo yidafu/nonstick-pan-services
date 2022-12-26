@@ -17,3 +17,12 @@ spring:
       stat:
         enabled: true
         port: 28082
+
+log4j:
+  logger:
+    dev:
+      yidafu:
+        pan:
+          component:
+            domain:
+              mapper: DEBUG

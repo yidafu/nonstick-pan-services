@@ -21,9 +21,5 @@ data class Component(
     var subCategory: String? = null,
     var umdJsUrl: String? = null,
     var createdAt: Date? = null,
-    var updatedAt: Date? = null,
-    var styleLabelConfig: String? = null,
-    var styleConfig: String? = null,
-    var requestConfig: String? = null,
-    var interactConfig: String? = null
+    var updatedAt: Date? = null
 ) : Serializable
