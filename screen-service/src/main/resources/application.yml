@@ -26,3 +26,6 @@ log4j:
           component:
             domain:
               mapper: DEBUG
+# swagger-ui custom path
+springdoc:
+  swagger-ui.path: "/swagger-ui.html"

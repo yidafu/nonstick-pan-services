@@ -1,0 +1,20 @@
+group = 'dev.yidafu.pan.screen'
+version = '0.0.1-SNAPSHOT'
+
+dependencies {
+//    implementation "dev.yidafu.pan:common:0.0.1-SNAPSHOT"
+    implementation project(path: ':common')
+}
+
+
+//publishing {
+//    publications {
+//        maven(MavenPublication) {
+//            groupId "dev.yidafu.pan"
+//            artifactId "screen-service"
+//            version "0.0.1-SNAPSHOT"
+//
+//            from components.java
+//        }
+//    }
+//}

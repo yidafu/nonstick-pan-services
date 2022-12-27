@@ -1,4 +1,4 @@
-package dev.yidafu.pan.component
+package dev.yidafu.pan.screen
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
