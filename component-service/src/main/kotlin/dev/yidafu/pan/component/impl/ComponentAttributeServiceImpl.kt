@@ -1,9 +1,9 @@
-package dev.yidafu.pan.component.service.impl
+package dev.yidafu.pan.component.impl
 
-import dev.yidafu.pan.component.common.exception.attribute.ComponentAttributeCreateFialException
-import dev.yidafu.pan.component.common.exception.attribute.IllegalComponentAttributeOwnerException
-import dev.yidafu.pan.component.common.exception.attribute.NonexistentComponentAttributeException
-import dev.yidafu.pan.component.common.json.JsonValue
+import dev.yidafu.pan.common.exception.attribute.ComponentAttributeCreateFialException
+import dev.yidafu.pan.common.exception.attribute.IllegalComponentAttributeOwnerException
+import dev.yidafu.pan.common.exception.attribute.NonexistentComponentAttributeException
+import dev.yidafu.pan.common.json.JsonValue
 import dev.yidafu.pan.component.convertor.ComponentAttributeConvertor
 import dev.yidafu.pan.component.convertor.ComponentConvertor
 import dev.yidafu.pan.component.domain.mapper.*

@@ -1,6 +1,6 @@
 package dev.yidafu.pan.common.exception
 
-enum class ExpectionCode(var code: Int, var message: String) {
+enum class ExceptionCode(var code: Int, var message: String) {
     UnknownJsonValueType(100100111, "不支持的JSON基础数据类型"),
     IllegalComponentAttributeOwner(
         2001001000,
@@ -13,6 +13,8 @@ enum class ExpectionCode(var code: Int, var message: String) {
     NonexistentComponentAttribute(100300111, "组件属性不存在"),
     CreateComponentAttributeFail(100300112, "创建组件属性失败"),
 
+    NonexistentScreen(100400100, "大屏不存在"),
+    CreateScreenFail(100400101, "创建大屏失败"),
 
     ;
 }

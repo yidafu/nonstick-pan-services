@@ -1,0 +1,16 @@
+group = 'dev.yidafu.pan'
+version = '0.0.1-SNAPSHOT'
+
+dependencies {}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId "dev.yidafu.pan"
+            artifactId "common"
+            version "0.0.1-SNAPSHOT"
+
+            from components.java
+        }
+    }
+}

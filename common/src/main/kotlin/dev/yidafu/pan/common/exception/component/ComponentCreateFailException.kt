@@ -1,6 +1,6 @@
-package dev.yidafu.pan.component.common.exception.component
+package dev.yidafu.pan.common.exception.component
 
-import dev.yidafu.pan.component.common.exception.ExpectionCode
-import dev.yidafu.pan.component.common.exception.ServiceException
+import dev.yidafu.pan.common.exception.ExceptionCode
+import dev.yidafu.pan.common.exception.ServiceException
 
-class ComponentCreateFailException: ServiceException(ExpectionCode.ComponentCreateFail)
+class ComponentCreateFailException: ServiceException(ExceptionCode.ComponentCreateFail)

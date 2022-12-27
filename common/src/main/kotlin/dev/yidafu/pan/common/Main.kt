@@ -1,4 +1,8 @@
 package dev.yidafu.pan.common
 
-class Main {
-}
+import org.springframework.boot.runApplication
+
+
+//fun main(args: Array<String>) {
+//    println(args);
+//}

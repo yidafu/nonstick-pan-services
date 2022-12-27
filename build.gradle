@@ -25,6 +25,7 @@ buildscript {
         mariadbConnectorJavaVersion = '3.1.0'
         springBootVersion = '3.0.1'
         kotlinVersion = '1.7.22'
+        openApiVersion = '1.6.14'
     }
 
     repositories {
@@ -56,6 +57,8 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.7.22'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.7.22'
     id "org.jetbrains.kotlin.kapt" version '1.7.22'
+    id 'maven-publish'
+    id "org.springdoc.openapi-gradle-plugin" version "1.6.0"
 }
 
 allprojects {
@@ -66,6 +69,7 @@ allprojects {
     apply plugin: 'org.jetbrains.kotlin.plugin.spring'
     apply plugin: 'org.jetbrains.kotlin.jvm'
     apply plugin: 'org.jetbrains.kotlin.kapt'
+    apply plugin: 'org.springdoc.openapi-gradle-plugin'
 
     //这个插件用于发布jar包到私服
     apply plugin: 'maven-publish'
@@ -115,6 +119,7 @@ subprojects {
     apply plugin: 'org.jetbrains.kotlin.plugin.spring'
     apply plugin: 'org.jetbrains.kotlin.jvm'
     apply plugin: 'org.jetbrains.kotlin.kapt'
+    apply plugin: 'org.springdoc.openapi-gradle-plugin'
 
     group = 'dev.yidafu.pan'
     version = '0.0.1-SNAPSHOT'
@@ -145,14 +150,12 @@ subprojects {
     /* 添加通用依赖 */
     dependencies {
         /**
-         * kotlin 依赖
-         */
+         * kotlin 依赖*/
         implementation 'org.jetbrains.kotlin:kotlin-reflect'
         implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
         /**
-         * spring 相关依赖
-         */
+         * spring 相关依赖*/
         implementation 'org.springframework.boot:spring-boot-starter-web'
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
         compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
@@ -178,14 +181,18 @@ subprojects {
         implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: mybatisStringStartVersion
 
         /**
-         * cloud 相关配置
-         */
+         * cloud 相关配置*/
         // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-bootstrap
         implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
         // https://mvnrepository.com/artifact/com.tencent.cloud/spring-cloud-starter-tencent-polaris-discovery
         implementation 'com.tencent.cloud:spring-cloud-starter-tencent-polaris-discovery'
-//        implementation 'org.springframework.cloud:spring-cloud-starter-zookeeper-discovery'
 
+        /**
+         * openapi 配置
+         **/
+        implementation "org.springdoc:springdoc-openapi-ui:${openApiVersion}"
+        implementation "org.springdoc:springdoc-openapi-kotlin:${openApiVersion}"
+        implementation "org.springdoc:springdoc-openapi-webmvc-core:${openApiVersion}"
     }
 
     kapt {
@@ -194,7 +201,7 @@ subprojects {
             // Set Mapstruct Configuration options here
             // https://kotlinlang.org/docs/reference/kapt.html#annotation-processor-arguments
             // https://mapstruct.org/documentation/stable/reference/html/#configuration-options
-             arg("mapstruct.defaultComponentModel", "spring")
+            arg("mapstruct.defaultComponentModel", "spring")
         }
     }
 

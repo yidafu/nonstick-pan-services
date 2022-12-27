@@ -1,6 +1,6 @@
-package dev.yidafu.pan.component.common.exception.attribute
+package dev.yidafu.pan.common.exception.attribute
 
-import dev.yidafu.pan.component.common.exception.ExpectionCode
-import dev.yidafu.pan.component.common.exception.ServiceException
+import dev.yidafu.pan.common.exception.ExceptionCode
+import dev.yidafu.pan.common.exception.ServiceException
 
-class IllegalComponentAttributeOwnerException : ServiceException(ExpectionCode.IllegalComponentAttributeOwner)
+class IllegalComponentAttributeOwnerException : ServiceException(ExceptionCode.IllegalComponentAttributeOwner)

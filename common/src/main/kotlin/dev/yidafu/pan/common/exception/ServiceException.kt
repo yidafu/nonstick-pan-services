@@ -1,4 +1,4 @@
-package dev.yidafu.pan.component.common.exception
+package dev.yidafu.pan.common.exception
 
 
 open class ServiceException : RuntimeException {
@@ -15,7 +15,7 @@ open class ServiceException : RuntimeException {
         this.code = code
     }
 
-    constructor(code: ExpectionCode) : super(code.message) {
+    constructor(code: ExceptionCode) : super(code.message) {
         this.code = code.code
         message = code.message
     }

@@ -1,6 +1,6 @@
-package dev.yidafu.pan.component.common.exception.json
+package dev.yidafu.pan.common.exception.json
 
-import dev.yidafu.pan.component.common.exception.ExpectionCode
-import dev.yidafu.pan.component.common.exception.ServiceException
+import dev.yidafu.pan.common.exception.ExceptionCode
+import dev.yidafu.pan.common.exception.ServiceException
 
-class UnknownJsonValueTypeException : ServiceException(ExpectionCode.UnknownJsonValueType)
+class UnknownJsonValueTypeException : ServiceException(ExceptionCode.UnknownJsonValueType)

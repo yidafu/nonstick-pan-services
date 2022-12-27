@@ -1,5 +1,5 @@
-package dev.yidafu.pan.component.common.exception.json
+package dev.yidafu.pan.common.exception.json
 
-import dev.yidafu.pan.component.common.exception.ServiceException
+import dev.yidafu.pan.common.exception.ServiceException
 
 class JsonTransformException(message: String?) : ServiceException(message)

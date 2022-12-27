@@ -1,3 +1,3 @@
 rootProject.name = 'NonstckpanService'
-include "component-service"
-include "screen-service"
+
+include "component-service","screen-service","common"

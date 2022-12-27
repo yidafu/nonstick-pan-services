@@ -26,3 +26,6 @@ log4j:
           component:
             domain:
               mapper: DEBUG
+
+springdoc:
+  packagesToScan: dev.yidafu.pan.component.controller

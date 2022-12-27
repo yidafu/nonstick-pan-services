@@ -1,4 +1,4 @@
-package dev.yidafu.pan.screen.common.exception
+package dev.yidafu.pan.common.exception.screen
 
 import dev.yidafu.pan.common.exception.ExceptionCode
 import dev.yidafu.pan.common.exception.ServiceException

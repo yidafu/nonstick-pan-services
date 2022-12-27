@@ -1,4 +1,4 @@
-package dev.yidafu.pan.component.common.json
+package dev.yidafu.pan.common.json
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.node.ArrayNode
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest
 class TestJsonUtils {
     @Test
     @DisplayName("JsonUtils@parseMap")

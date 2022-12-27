@@ -1,10 +1,10 @@
-package dev.yidafu.pan.component.service.impl
+package dev.yidafu.pan.component.impl
 
 import com.fasterxml.jackson.databind.node.ObjectNode
-import dev.yidafu.pan.component.common.exception.component.ComponentCreateFailException
-import dev.yidafu.pan.component.common.exception.component.NonexistentComponentException
-import dev.yidafu.pan.component.common.json.JsonUtils
-import dev.yidafu.pan.component.common.json.JsonValue
+import dev.yidafu.pan.common.exception.component.ComponentCreateFailException
+import dev.yidafu.pan.common.exception.component.NonexistentComponentException
+import dev.yidafu.pan.common.json.JsonUtils
+import dev.yidafu.pan.common.json.JsonValue
 import dev.yidafu.pan.component.convertor.ComponentAttributeConvertor
 import dev.yidafu.pan.component.convertor.ComponentConvertor
 import dev.yidafu.pan.component.domain.dto.SaveComponentDTO
