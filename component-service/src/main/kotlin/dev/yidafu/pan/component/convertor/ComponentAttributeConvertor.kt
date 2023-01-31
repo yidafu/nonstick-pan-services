@@ -1,6 +1,6 @@
 package dev.yidafu.pan.component.convertor
 
-import dev.yidafu.pan.component.common.json.JsonValue
+import dev.yidafu.pan.common.json.JsonValue
 import dev.yidafu.pan.component.domain.dto.SaveComponentAttributeDTO
 import dev.yidafu.pan.component.domain.dto.UpdateComponentAttributeDTO
 import dev.yidafu.pan.component.domain.model.ComponentAttribute

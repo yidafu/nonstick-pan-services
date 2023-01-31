@@ -44,7 +44,7 @@ object ComponentDynamicSqlSupport {
 
     val updatedAt = component.updatedAt
 
-    class Component : AliasableSqlTable<Component>("vs_component", ::Component) {
+    class Component : AliasableSqlTable<Component>("vs_component", ComponentDynamicSqlSupport::Component) {
         val id = column<Long>(name = "id", jdbcType = JDBCType.BIGINT)
 
         val screenId = column<Long>(name = "screen_id", jdbcType = JDBCType.BIGINT)

@@ -1,7 +1,7 @@
 package dev.yidafu.pan.component.domain.dto
 
 import com.fasterxml.jackson.databind.node.ObjectNode
-import dev.yidafu.pan.component.common.json.JsonUtils
+import dev.yidafu.pan.common.json.JsonUtils
 
 
 open class BaseComponentDTO {

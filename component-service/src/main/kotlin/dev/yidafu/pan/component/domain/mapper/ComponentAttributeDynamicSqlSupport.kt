@@ -22,7 +22,9 @@ object ComponentAttributeDynamicSqlSupport {
 
     val updatedAt = componentAttribute.updatedAt
 
-    class ComponentAttribute : AliasableSqlTable<ComponentAttribute>("vs_component_attribute", ::ComponentAttribute) {
+    class ComponentAttribute : AliasableSqlTable<ComponentAttribute>("vs_component_attribute",
+        ComponentAttributeDynamicSqlSupport::ComponentAttribute
+    ) {
         val id = column<Long>(name = "id", jdbcType = JDBCType.BIGINT)
 
         val ownerId = column<Long>(name = "owner_id", jdbcType = JDBCType.BIGINT)
