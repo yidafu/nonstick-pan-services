@@ -1,13 +1,15 @@
 package dev.yidafu.pan.screen.service.impl
 
 import dev.yidafu.pan.common.exception.screen.CreateScreenFailException
+import dev.yidafu.pan.common.model.vo.PageVO
+import dev.yidafu.pan.common.model.vo.ScreenVO
 import dev.yidafu.pan.screen.common.exception.NonexistentScreenException
 import dev.yidafu.pan.screen.convertor.ScreenConvertor
 import dev.yidafu.pan.screen.domain.dto.SaveScreenDTO
 import dev.yidafu.pan.screen.domain.dto.UpdateScreenDTO
 import dev.yidafu.pan.screen.domain.mapper.*
 import dev.yidafu.pan.screen.domain.mapper.ScreenDynamicSqlSupport.screen
-import dev.yidafu.pan.screen.domain.vo.ScreenVO
+import dev.yidafu.pan.screen.domain.query.PaginationQuery
 import dev.yidafu.pan.screen.service.ScreenService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -57,5 +59,22 @@ class ScreenServiceImpl : ScreenService {
                 screen.id isEqualTo screenId
             }
         }?.let { it > 0 } ?: false
+    }
+
+    override fun getAll(query: PaginationQuery): PageVO<List<ScreenVO>> {
+        val screenList = mapper?.select {
+            query.size?.let {
+                val page = (query.page ?: 1)
+                limit(page * it)
+                offset(page -1)
+            }
+        } ?: listOf()
+        val total = mapper?.count {  } ?: 0
+        return PageVO(
+            convertor?.to(screenList) ?: listOf(),
+            query.page ?: 1,
+            query.size ?: -1,
+            total,
+            )
     }
 }

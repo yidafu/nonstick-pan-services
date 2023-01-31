@@ -1,6 +1,8 @@
 package dev.yidafu.pan.common.exception
 
-enum class ExceptionCode(var code: Int, var message: String) {
+import dev.yidafu.kotlin.api.common.IErrorCode
+
+enum class ExceptionCode(override var code: Int, override var message: String): IErrorCode {
     UnknownJsonValueType(100100111, "不支持的JSON基础数据类型"),
     IllegalComponentAttributeOwner(
         2001001000,

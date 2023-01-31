@@ -1,8 +1,10 @@
 package dev.yidafu.pan.screen.controller
 
+import dev.yidafu.pan.common.model.vo.PageVO
+import dev.yidafu.pan.common.model.vo.ScreenVO
 import dev.yidafu.pan.screen.domain.dto.SaveScreenDTO
 import dev.yidafu.pan.screen.domain.dto.UpdateScreenDTO
-import dev.yidafu.pan.screen.domain.vo.ScreenVO
+import dev.yidafu.pan.screen.domain.query.PaginationQuery
 import dev.yidafu.pan.screen.service.ScreenService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -31,10 +33,13 @@ class ScreenController {
         return screenService!!.removeById(screenId);
     }
 
-
-
     @PostMapping("/screen")
     fun createScreen(@RequestBody saveDto: SaveScreenDTO): ScreenVO {
         return screenService!!.createOne(saveDto)
+    }
+
+    @GetMapping("/screens")
+    fun getAllScreen(@RequestParam(value = "page") page: Long?, @RequestParam(value = "size") size: Long?): PageVO<List<ScreenVO>> {
+        return screenService!!.getAll(PaginationQuery(page, size))
     }
 }

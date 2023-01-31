@@ -144,18 +144,28 @@ subprojects {
             name "华为开源镜像库"
             url "https://mirrors.huaweicloud.com/repository/maven/"
         }
+        maven {
+            name "私有镜像"
+            url "https://nexus.ydq.io/repository/kotlin-dev/"
+        }
         mavenCentral()
     }
 
+    // https://cwlab.hatenablog.jp/entry/2019/12/18/233216
+    configurations {
+        mybatisGenerator
+    }
     /* 添加通用依赖 */
     dependencies {
         /**
-         * kotlin 依赖*/
+         * kotlin 依赖
+         * */
         implementation 'org.jetbrains.kotlin:kotlin-reflect'
         implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
 
         /**
-         * spring 相关依赖*/
+         * spring 相关依赖
+         * */
         implementation 'org.springframework.boot:spring-boot-starter-web'
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
         compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
@@ -181,11 +191,16 @@ subprojects {
         implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: mybatisStringStartVersion
 
         /**
-         * cloud 相关配置*/
+         * cloud 相关配置
+         * */
         // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-bootstrap
         implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
         // https://mvnrepository.com/artifact/com.tencent.cloud/spring-cloud-starter-tencent-polaris-discovery
         implementation 'com.tencent.cloud:spring-cloud-starter-tencent-polaris-discovery'
+        // https://mvnrepository.com/artifact/com.tencent.cloud/spring-cloud-tencent-pushgateway-plugin
+        implementation 'com.tencent.cloud:spring-cloud-tencent-pushgateway-plugin'
+        // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
+        implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '4.0.1'
 
         /**
          * openapi 配置
@@ -193,6 +208,15 @@ subprojects {
         implementation "org.springdoc:springdoc-openapi-ui:${openApiVersion}"
         implementation "org.springdoc:springdoc-openapi-kotlin:${openApiVersion}"
         implementation "org.springdoc:springdoc-openapi-webmvc-core:${openApiVersion}"
+
+        /**
+         * 自有依赖
+         */
+        implementation 'dev.yidafu.kotlin:api-common:0.0.3'
+
+        mybatisGenerator group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: mybatisGeneratorVersion
+        mybatisGenerator group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: mariadbConnectorJavaVersion
+        //    mybatisGenerator group: 'tk.mybatis', name: 'mapper', version: mybatisMapperVersion
     }
 
     kapt {
@@ -235,20 +259,6 @@ subprojects {
             destinationFile = file("${buildDir}/jacoco/test.exec")
         }
     }
-
-// https://cwlab.hatenablog.jp/entry/2019/12/18/233216
-
-
-    configurations {
-        mybatisGenerator
-    }
-
-    dependencies {
-        mybatisGenerator group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: mybatisGeneratorVersion
-        mybatisGenerator group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: mariadbConnectorJavaVersion
-//    mybatisGenerator group: 'tk.mybatis', name: 'mapper', version: mybatisMapperVersion
-    }
-
 
     task mybatisGenerator {
         doLast {

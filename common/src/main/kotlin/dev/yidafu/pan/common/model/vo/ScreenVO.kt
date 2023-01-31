@@ -1,4 +1,4 @@
-package dev.yidafu.pan.screen.domain.vo
+package dev.yidafu.pan.common.model.vo
 
 import java.io.Serializable
 import java.util.*
