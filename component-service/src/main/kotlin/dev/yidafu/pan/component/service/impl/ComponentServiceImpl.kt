@@ -1,19 +1,18 @@
-package dev.yidafu.pan.component.impl
+package dev.yidafu.pan.component.service.impl
 
 import com.fasterxml.jackson.databind.node.ObjectNode
 import dev.yidafu.pan.common.exception.component.ComponentCreateFailException
 import dev.yidafu.pan.common.exception.component.NonexistentComponentException
 import dev.yidafu.pan.common.json.JsonUtils
 import dev.yidafu.pan.common.json.JsonValue
+import dev.yidafu.pan.common.model.vo.ComponentVO
 import dev.yidafu.pan.component.convertor.ComponentAttributeConvertor
 import dev.yidafu.pan.component.convertor.ComponentConvertor
 import dev.yidafu.pan.component.domain.dto.SaveComponentDTO
 import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.component
-import dev.yidafu.pan.component.domain.mapper.ComponentMapper
 import dev.yidafu.pan.component.domain.mapper.*
+import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.component
 import dev.yidafu.pan.component.domain.model.Component
-import dev.yidafu.pan.component.domain.vo.ComponentVO
 import dev.yidafu.pan.component.service.ComponentAttributeService
 import dev.yidafu.pan.component.service.ComponentService
 import org.springframework.beans.factory.annotation.Autowired
@@ -47,10 +46,10 @@ class ComponentServiceImpl : ComponentService {
             val attrObj = attrMap?.let { it1 -> JsonUtils.parseMap(it1) };
             attrObj?.let {
                 it2 ->
-                vo?.styleConfig = it2.get("styleConfig") as ObjectNode?
-                vo?.requestConfig = it2.get("requestConfig") as ObjectNode?
-                vo?.styleLabelConfig = it2.get("styleLabelConfig") as ObjectNode?
-                vo?.interactConfig = it2.get("interactConfig") as ObjectNode?
+                vo?.styleConfig = it2.get("styleConfig") as ObjectNode? ?: JsonUtils.createObject();
+                vo?.requestConfig = it2.get("requestConfig") as ObjectNode? ?: JsonUtils.createObject();
+                vo?.styleLabelConfig = it2.get("styleLabelConfig") as ObjectNode? ?: JsonUtils.createObject();
+                vo?.interactConfig = it2.get("interactConfig") as ObjectNode? ?: JsonUtils.createObject();
             }
             vo;
         } ?: throw NonexistentComponentException()
@@ -70,10 +69,10 @@ class ComponentServiceImpl : ComponentService {
             ?.let { convertor?.to(componentList) }
             ?.map {
                 val attrObj = comAttrMap?.get(it.id)?.let { it1 -> JsonUtils.parseMap(it1) }
-                it.styleConfig = attrObj?.get("styleConfig") as ObjectNode?
-                it.requestConfig = attrObj?.get("requestConfig") as ObjectNode?
-                it.styleLabelConfig = attrObj?.get("styleLabelConfig") as ObjectNode?
-                it.interactConfig = attrObj?.get("interactConfig") as ObjectNode?
+                it.styleConfig = attrObj?.get("styleConfig") as ObjectNode? ?: JsonUtils.createObject();
+                it.requestConfig = attrObj?.get("requestConfig") as ObjectNode? ?: JsonUtils.createObject()
+                it.styleLabelConfig = attrObj?.get("styleLabelConfig") as ObjectNode? ?: JsonUtils.createObject()
+                it.interactConfig = attrObj?.get("interactConfig") as ObjectNode? ?: JsonUtils.createObject()
                 it
             } ?: Collections.emptyList()
     }

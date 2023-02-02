@@ -12,4 +12,8 @@ class ScreenClientFallback: ScreenClient {
     override fun getList(page: Long, size: Long): PageVO<List<ScreenVO>> {
         TODO("Not yet implemented")
     }
+
+    override fun getOneScreen(screenId: Long): ScreenVO {
+        TODO("Not yet implemented")
+    }
 }

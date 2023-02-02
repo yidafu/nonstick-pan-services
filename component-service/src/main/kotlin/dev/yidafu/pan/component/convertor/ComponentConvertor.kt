@@ -3,7 +3,7 @@ package dev.yidafu.pan.component.convertor
 import dev.yidafu.pan.component.domain.dto.SaveComponentDTO
 import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO
 import dev.yidafu.pan.component.domain.model.Component
-import dev.yidafu.pan.component.domain.vo.ComponentVO
+import dev.yidafu.pan.common.model.vo.ComponentVO
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 import org.mapstruct.factory.Mappers

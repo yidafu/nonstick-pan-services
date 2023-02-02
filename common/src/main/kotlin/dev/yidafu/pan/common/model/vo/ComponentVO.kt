@@ -1,9 +1,10 @@
-package dev.yidafu.pan.component.domain.vo
+package dev.yidafu.pan.common.model.vo
 
 import com.fasterxml.jackson.databind.node.ObjectNode
+import java.io.Serializable
 import java.sql.Date
 
-class ComponentVO {
+class ComponentVO: Serializable {
     var id: Long? = null
     var screenId: Long? = null
     var groupId: Long? = null

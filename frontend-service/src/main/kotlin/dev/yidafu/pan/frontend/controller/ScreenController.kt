@@ -1,27 +1,36 @@
 package dev.yidafu.pan.frontend.controller
 
 import dev.yidafu.kotlin.api.common.Response
+import dev.yidafu.pan.common.model.vo.ComponentVO
 import dev.yidafu.pan.common.model.vo.PageVO
 import dev.yidafu.pan.common.model.vo.ScreenVO
+import dev.yidafu.pan.frontend.client.ComponentClient
 import dev.yidafu.pan.frontend.client.ScreenClient
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
+/**
+ * TODO: 鉴权
+ */
 @RestController
 class ScreenController {
     @Autowired
-    val screenClient: ScreenClient? = null;
+    var screenClient: ScreenClient? = null;
 
-    @GetMapping("/api/screens")
+    @Autowired
+    lateinit var componentClient: ComponentClient;
+
+    @GetMapping("/screens")
     fun getAllScreen(): Response<List<ScreenVO>> {
         return screenClient?.getAll()?.let {
             Response.success(it.data)
         } ?: Response.success(listOf())
     }
 
-    @GetMapping("/api/screens/page")
+    @GetMapping("/screens/page")
     fun getPaginationScreen(
         @RequestParam(value = "page", defaultValue = "1") page: Long,
         @RequestParam(value = "size", defaultValue = "10") size: Long
@@ -29,5 +38,19 @@ class ScreenController {
         return screenClient?.getList(page, size)?.let {
             Response.success(it)
         } ?: Response.success(PageVO(listOf(), page, size, 0))
+    }
+
+    @GetMapping("/screen/{screenId}")
+    fun getOneScreen(@PathVariable("screenId") screenId: Long): Response<ScreenVO> {
+        return screenClient?.getOneScreen(screenId)?.let {
+            Response.success(it)
+        } ?: Response.success(ScreenVO())
+    }
+
+    @GetMapping("/screen/{screenId}/components")
+    fun getScreenComponent(@PathVariable("screenId") screenId: Long): Response<List<ComponentVO>> {
+        return componentClient.getComponents(screenId)?.let {
+            Response.success(it)
+        } ?: Response.success(listOf())
     }
 }

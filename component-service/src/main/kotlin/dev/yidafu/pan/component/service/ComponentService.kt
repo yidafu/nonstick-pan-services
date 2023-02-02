@@ -2,7 +2,7 @@ package dev.yidafu.pan.component.service
 
 import dev.yidafu.pan.component.domain.dto.SaveComponentDTO
 import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO
-import dev.yidafu.pan.component.domain.vo.ComponentVO
+import dev.yidafu.pan.common.model.vo.ComponentVO
 
 interface ComponentService {
     fun findById(id: Long): ComponentVO

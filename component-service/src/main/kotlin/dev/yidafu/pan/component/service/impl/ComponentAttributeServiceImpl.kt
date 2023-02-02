@@ -1,21 +1,18 @@
-package dev.yidafu.pan.component.impl
+package dev.yidafu.pan.component.service.impl
 
 import dev.yidafu.pan.common.exception.attribute.ComponentAttributeCreateFialException
 import dev.yidafu.pan.common.exception.attribute.IllegalComponentAttributeOwnerException
 import dev.yidafu.pan.common.exception.attribute.NonexistentComponentAttributeException
 import dev.yidafu.pan.common.json.JsonValue
 import dev.yidafu.pan.component.convertor.ComponentAttributeConvertor
-import dev.yidafu.pan.component.convertor.ComponentConvertor
-import dev.yidafu.pan.component.domain.mapper.*
 import dev.yidafu.pan.component.domain.dto.SaveComponentAttributeDTO
 import dev.yidafu.pan.component.domain.dto.UpdateComponentAttributeDTO
-import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO
+import dev.yidafu.pan.component.domain.mapper.*
 import dev.yidafu.pan.component.domain.mapper.ComponentAttributeDynamicSqlSupport.componentAttribute
 import dev.yidafu.pan.component.domain.model.ComponentAttribute
 import dev.yidafu.pan.component.service.ComponentAttributeService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-
 import java.util.*
 import java.util.function.Function
 import java.util.function.Predicate

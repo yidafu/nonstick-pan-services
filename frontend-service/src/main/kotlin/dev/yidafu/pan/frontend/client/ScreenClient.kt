@@ -6,6 +6,7 @@ import dev.yidafu.pan.common.model.vo.ScreenVO
 import dev.yidafu.pan.frontend.client.fallback.ScreenClientFallback
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
 
 @FeignClient(value = "PanScreenService", fallback = ScreenClientFallback::class)
@@ -15,4 +16,7 @@ interface ScreenClient {
 
     @GetMapping("/screens")
     fun getList(@RequestParam("page") page: Long, @RequestParam("size") size: Long): PageVO<List<ScreenVO>>
+
+    @GetMapping("/screen/{screenId}")
+    fun getOneScreen(@PathVariable("screenId") screenId: Long): ScreenVO
 }
