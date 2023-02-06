@@ -69,11 +69,16 @@ object JsonUtils {
         if (path.startsWith("[")) {
             val index = path.substring(1, path.length - 1).toInt()
             if (node!!.has(index)) {
-                val childNode = node[index] as ArrayNode
+                val childNode = node[index]
                 setPropertyValue(childNode, subPaths, value)
             } else {
-                val childNode = objectMapper.createArrayNode()
-                childNode.add(childNode)
+                val childNode = if (subPaths[0].startsWith(("["))) {
+                    objectMapper.createArrayNode();
+                } else {
+                    objectMapper.createObjectNode();
+                }
+
+                (node as ArrayNode).insert(index, childNode)
                 setPropertyValue(childNode, subPaths, value)
             }
         } else {
@@ -81,51 +86,53 @@ object JsonUtils {
                 val childNode = node[path]
                 setPropertyValue(childNode, subPaths, value)
             } else {
-                if (subPaths[0].startsWith("[")) {
-                    val childNode = objectMapper.createArrayNode()
-                    (node as ObjectNode).put(path, childNode)
-                    setPropertyValue(childNode, subPaths, value)
+                val childNode =  if (subPaths[0].startsWith("[")) {
+                    objectMapper.createArrayNode()
                 } else {
-                    val childNode = objectMapper.createObjectNode()
-                    (node as ObjectNode).put(path, childNode)
-                    setPropertyValue(childNode, subPaths, value)
+                    objectMapper.createObjectNode()
                 }
+
+                (node as ObjectNode).replace(path, childNode)
+                setPropertyValue(childNode, subPaths, value)
             }
         }
     }
 
     private fun prop2PathList(prop: String): List<String> {
-        var prop = prop
+        var mutProp = prop
         val paths: MutableList<String> = ArrayList()
-        while (prop.isNotEmpty()) {
-            if (prop[0] == '[') {
-                val closeBracketIdx = prop.indexOf(']')
-                val path = prop.substring(0, closeBracketIdx + 1)
+        while (mutProp.isNotEmpty()) {
+            if (mutProp[0] == '[') {
+                val closeBracketIdx = mutProp.indexOf(']')
+                val path = mutProp.substring(0, closeBracketIdx + 1)
                 paths.add(path)
-                prop = prop.substring(closeBracketIdx + 1)
+                mutProp = mutProp.substring(closeBracketIdx + 1)
+                if (mutProp.isNotEmpty() && mutProp[0] == '.') {
+                    mutProp = mutProp.substring(1)
+                }
                 continue
             }
-            val dotIdx = prop.indexOf('.')
-            val bracketIdx = prop.indexOf('[')
+
+            val dotIdx = mutProp.indexOf('.')
+            val bracketIdx = mutProp.indexOf('[')
             if (dotIdx < 0 && bracketIdx < 0) {
-                paths.add(prop)
+                paths.add(mutProp)
                 break
             }
-            var idx = -1
-            if (dotIdx < 0) {
-                idx = bracketIdx
+            val idx = if (dotIdx < 0) {
+                bracketIdx
             } else if (bracketIdx < 0) {
-                idx = dotIdx
+                dotIdx
             } else {
-                Math.min(dotIdx, bracketIdx)
+                dotIdx.coerceAtMost(bracketIdx)
             }
-            if (idx > 0) {
-                val path = prop.substring(0, idx)
+            if (idx >= 0) {
+                val path = mutProp.substring(0, idx)
                 paths.add(path)
-                prop = if (prop[idx] == '.') {
-                    prop.substring(idx + 1)
+                mutProp = if (mutProp[idx] == '.') {
+                    mutProp.substring(idx + 1)
                 } else {
-                    prop.substring(idx)
+                    mutProp.substring(idx)
                 }
             }
         }

@@ -1,5 +1,6 @@
 package dev.yidafu.pan.common.model.vo
 
+import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.node.ObjectNode
 import java.io.Serializable
 import java.sql.Date
@@ -23,8 +24,8 @@ class ComponentVO: Serializable {
     var umdJsUrl: String? = null
     var createdAt: Date? = null
     var updatedAt: Date? = null
-    var styleLabelConfig: ObjectNode? = null
-    var styleConfig: ObjectNode? = null
-    var requestConfig: ObjectNode? = null
-    var interactConfig: ObjectNode? = null
+    var styleLabelConfig: JsonNode? = null
+    var styleConfig: JsonNode? = null
+    var requestConfig: JsonNode? = null
+    var interactConfig: JsonNode? = null
 }

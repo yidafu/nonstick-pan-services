@@ -38,8 +38,8 @@ class JsonValue(valueType: Byte?, value: String?) {
         return value
     }
 
-    fun getNumber(): Long {
-        return value.toLong()
+    fun getNumber(): Double {
+        return value.toDouble()
     }
 
     fun getBoolean(): Boolean {
