@@ -69,10 +69,10 @@ class ComponentServiceImpl : ComponentService {
             ?.let { convertor?.to(componentList) }
             ?.map {
                 val attrObj = comAttrMap?.get(it.id)?.let { it1 -> JsonUtils.parseMap(it1) }
-                it.styleConfig = attrObj?.get("styleConfig") as ObjectNode? ?: JsonUtils.createObject();
-                it.requestConfig = attrObj?.get("requestConfig") as ObjectNode? ?: JsonUtils.createObject()
-                it.styleLabelConfig = attrObj?.get("styleLabelConfig") as ObjectNode? ?: JsonUtils.createObject()
-                it.interactConfig = attrObj?.get("interactConfig") as ObjectNode? ?: JsonUtils.createObject()
+                it.styleConfig = attrObj?.get("styleConfig") ?: JsonUtils.createObject();
+                it.requestConfig = attrObj?.get("requestConfig") ?: JsonUtils.createObject()
+                it.styleLabelConfig = attrObj?.get("styleLabelConfig") ?: JsonUtils.createObject()
+                it.interactConfig = attrObj?.get("interactConfig") ?: JsonUtils.createObject()
                 it
             } ?: Collections.emptyList()
     }

@@ -26,10 +26,12 @@ class ComponentAttributeServiceImpl : ComponentAttributeService {
     @Autowired
     var convertor: ComponentAttributeConvertor? = null
 
+    val globelOwnerId = 0L
+
     override fun findOneById(id: Long): ComponentAttribute {
         return mapper?.selectOne{
             where {
-                componentAttribute.id isEqualTo  id
+                componentAttribute.id isEqualTo id
             }
         } ?: throw NonexistentComponentAttributeException();
     }
@@ -42,10 +44,17 @@ class ComponentAttributeServiceImpl : ComponentAttributeService {
         } ?: throw NonexistentComponentAttributeException();
     }
 
+    /**
+     * TODO: 缓存全局属性
+     */
     override fun findAllByOwner(ownerId: Long): Map<String, JsonValue> {
         val attrList = mapper?.select {
             where {
-                componentAttribute.ownerId isEqualTo ownerId
+                if (ownerId == globelOwnerId) {
+                    componentAttribute.ownerId isEqualTo globelOwnerId
+                } else {
+                    componentAttribute.ownerId isIn  listOf<Long>(ownerId, globelOwnerId)
+                }
             }
         } ?: Collections.emptyList();
 
@@ -53,19 +62,32 @@ class ComponentAttributeServiceImpl : ComponentAttributeService {
     }
 
     override fun findAllByOwnerList(ownerIdList: List<Long>): Map<Long, Map<String, JsonValue>> {
+        val globalAttr = findAllByOwner(globelOwnerId)
+
         val attrList = mapper?.select {
             where {
                 componentAttribute.ownerId isIn ownerIdList
             }
         }
-        return attrList
+        val ownerMap = attrList
             ?.filter { it.ownerId != null && it.attr != null }
             ?.groupBy { it.ownerId!! }
             ?.mapValues {
-                it.value.map {
-                        it1 -> it1.attr!! to JsonValue(it1.valueType, it1.value)
-                }.toMap()
-            } ?: emptyMap<Long, Map<String, JsonValue>>()
+                it.value.associate {it1 ->
+                    it1.attr!! to JsonValue(it1.valueType, it1.value)
+                }
+            }  ?: emptyMap();
+
+        return ownerIdList.associateWith {
+            val fullMap = (
+                    (ownerMap[it]?.asSequence() ?: emptySequence())
+                            + globalAttr.asSequence()
+                ).associate { it3 ->
+                    it3.key to it3.value
+                }
+
+            fullMap
+        }
     }
     override fun createOne(dto: SaveComponentAttributeDTO): ComponentAttribute {
         val componentAttribute: ComponentAttribute = convertor!!.from(dto)
@@ -76,7 +98,7 @@ class ComponentAttributeServiceImpl : ComponentAttributeService {
     }
 
     override fun batchCreate(list: List<SaveComponentAttributeDTO>): Map<String, JsonValue> {
-        if (list.size == 0) return Collections.emptyMap();
+        if (list.isEmpty()) return Collections.emptyMap();
 
         val ownerId: Long = list[0].ownerId ?: throw IllegalComponentAttributeOwnerException();
 
@@ -121,7 +143,7 @@ class ComponentAttributeServiceImpl : ComponentAttributeService {
     }
 
     override fun batchUpdateAttr(list: List<UpdateComponentAttributeDTO>): List<ComponentAttribute> {
-        if (list.size == 0) return Collections.emptyList();
+        if (list.isEmpty()) return Collections.emptyList();
 
         return list.stream()
             .map(Function<UpdateComponentAttributeDTO, ComponentAttribute> { dto: UpdateComponentAttributeDTO ->
@@ -141,7 +163,7 @@ class ComponentAttributeServiceImpl : ComponentAttributeService {
     }
 
     override fun remoteByAttrs(ownerId: Long, attrList: List<String>): Boolean {
-        if (attrList.size == 0) return true;
+        if (attrList.isEmpty()) return true;
          mapper!!.delete {
             where {
                 componentAttribute.ownerId isEqualTo ownerId
