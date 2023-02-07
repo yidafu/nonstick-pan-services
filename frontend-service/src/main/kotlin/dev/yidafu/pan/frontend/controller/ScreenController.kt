@@ -1,16 +1,15 @@
 package dev.yidafu.pan.frontend.controller
 
 import dev.yidafu.kotlin.api.common.Response
+import dev.yidafu.pan.common.exception.ScreenNoComponentException
+import dev.yidafu.pan.common.model.dto.UpdateComponentDTO
 import dev.yidafu.pan.common.model.vo.ComponentVO
 import dev.yidafu.pan.common.model.vo.PageVO
 import dev.yidafu.pan.common.model.vo.ScreenVO
 import dev.yidafu.pan.frontend.client.ComponentClient
 import dev.yidafu.pan.frontend.client.ScreenClient
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 /**
  * TODO: 鉴权
@@ -49,8 +48,22 @@ class ScreenController {
 
     @GetMapping("/screen/{screenId}/components")
     fun getScreenComponent(@PathVariable("screenId") screenId: Long): Response<List<ComponentVO>> {
-        return componentClient.getComponents(screenId)?.let {
+        return componentClient.getComponents(screenId).let {
             Response.success(it)
         } ?: Response.success(listOf())
+    }
+
+    @PutMapping("/screen/{screenId}/component/{componentId}")
+    fun updateComponent(
+        @PathVariable("screenId") screenId: Long,
+        @PathVariable("componentId") componentId: Long,
+        @RequestBody updateDto: UpdateComponentDTO,
+    ): Response<ComponentVO> {
+        return componentClient.updateComponent(componentId, updateDto).let {
+            if (it.screenId != screenId) {
+                throw ScreenNoComponentException()
+            }
+            Response.success(it)
+        }
     }
 }

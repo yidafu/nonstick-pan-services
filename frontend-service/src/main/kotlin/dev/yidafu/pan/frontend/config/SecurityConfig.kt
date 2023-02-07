@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 class SecurityConfig : WebMvcConfigurationSupport() {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
-            .allowedMethods("GET", "POST", "PUT", "DELETE")
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
             .allowedOrigins("*")
             .allowedHeaders("*")
             .allowCredentials(false);

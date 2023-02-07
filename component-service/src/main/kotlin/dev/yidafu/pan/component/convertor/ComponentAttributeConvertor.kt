@@ -1,8 +1,8 @@
 package dev.yidafu.pan.component.convertor
 
 import dev.yidafu.pan.common.json.JsonValue
-import dev.yidafu.pan.component.domain.dto.SaveComponentAttributeDTO
-import dev.yidafu.pan.component.domain.dto.UpdateComponentAttributeDTO
+import dev.yidafu.pan.common.model.dto.SaveComponentAttributeDTO
+import dev.yidafu.pan.common.model.dto.UpdateComponentAttributeDTO
 import dev.yidafu.pan.component.domain.model.ComponentAttribute
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper

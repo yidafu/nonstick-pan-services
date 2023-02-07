@@ -1,8 +1,8 @@
 package dev.yidafu.pan.component.controller
 
+import dev.yidafu.pan.common.model.dto.SaveComponentDTO
+import dev.yidafu.pan.common.model.dto.UpdateComponentDTO
 import dev.yidafu.pan.common.model.vo.ComponentVO
-import dev.yidafu.pan.component.domain.dto.SaveComponentDTO
-import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO
 import dev.yidafu.pan.component.service.ComponentService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*

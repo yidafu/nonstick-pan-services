@@ -1,7 +1,6 @@
-package dev.yidafu.pan.component.domain.dto
+package dev.yidafu.pan.common.model.dto
 
-import com.fasterxml.jackson.databind.node.ObjectNode
-import dev.yidafu.pan.common.json.JsonUtils
+import com.fasterxml.jackson.databind.JsonNode
 
 
 open class BaseComponentDTO {
@@ -20,8 +19,8 @@ open class BaseComponentDTO {
     val category: String? = null
     val subCategory: String? = null
     val umdJsUrl: String? = null
-    val styleLabelConfig: ObjectNode = JsonUtils.createObject()
-    val styleConfig: ObjectNode = JsonUtils.createObject()
-    val requestConfig: ObjectNode = JsonUtils.createObject()
-    val interactConfig: ObjectNode = JsonUtils.createObject()
+    val styleLabelConfig: JsonNode? =null
+    val styleConfig: JsonNode? = null
+    val requestConfig: JsonNode? = null
+    val interactConfig: JsonNode? = null
 }

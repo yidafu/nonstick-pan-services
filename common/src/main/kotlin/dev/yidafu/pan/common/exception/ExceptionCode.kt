@@ -17,6 +17,7 @@ enum class ExceptionCode(override var code: Int, override var message: String): 
 
     NonexistentScreen(100400100, "大屏不存在"),
     CreateScreenFail(100400101, "创建大屏失败"),
+    ScreenNoComponent(100400102, "大屏没有改组件")
 
     ;
 }

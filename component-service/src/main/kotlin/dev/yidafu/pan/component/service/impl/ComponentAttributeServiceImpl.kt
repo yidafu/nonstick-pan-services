@@ -4,9 +4,9 @@ import dev.yidafu.pan.common.exception.attribute.ComponentAttributeCreateFialExc
 import dev.yidafu.pan.common.exception.attribute.IllegalComponentAttributeOwnerException
 import dev.yidafu.pan.common.exception.attribute.NonexistentComponentAttributeException
 import dev.yidafu.pan.common.json.JsonValue
+import dev.yidafu.pan.common.model.dto.SaveComponentAttributeDTO
+import dev.yidafu.pan.common.model.dto.UpdateComponentAttributeDTO
 import dev.yidafu.pan.component.convertor.ComponentAttributeConvertor
-import dev.yidafu.pan.component.domain.dto.SaveComponentAttributeDTO
-import dev.yidafu.pan.component.domain.dto.UpdateComponentAttributeDTO
 import dev.yidafu.pan.component.domain.mapper.*
 import dev.yidafu.pan.component.domain.mapper.ComponentAttributeDynamicSqlSupport.componentAttribute
 import dev.yidafu.pan.component.domain.model.ComponentAttribute
@@ -163,7 +163,7 @@ class ComponentAttributeServiceImpl : ComponentAttributeService {
     }
 
     override fun remoteByAttrs(ownerId: Long, attrList: List<String>): Boolean {
-        if (attrList.isEmpty()) return true;
+        if (attrList.isEmpty()) return true
          mapper!!.delete {
             where {
                 componentAttribute.ownerId isEqualTo ownerId

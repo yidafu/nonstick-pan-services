@@ -1,10 +1,7 @@
 package dev.yidafu.pan.common.json
 
 import dev.yidafu.pan.common.exception.json.UnknownJsonValueTypeException
-//import lombok.AllArgsConstructor
 
-//@AllArgsConstructor
-//@NoArgsConstructor
 class JsonValue(valueType: Byte?, value: String?) {
     var valueType: JsonValueType? = null
     var value: String
@@ -47,11 +44,17 @@ class JsonValue(valueType: Byte?, value: String?) {
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) return true;
+        if (this === other) return true
         if (other is JsonValue) {
-            return valueType == other.valueType && value == other.value;
+            return valueType == other.valueType && value == other.value
         }
-        return false;
+        return false
+    }
+
+    override fun hashCode(): Int {
+        var result = valueType?.hashCode() ?: 0
+        result = 31 * result + value.hashCode()
+        return result
     }
 
     companion object {
@@ -59,7 +62,7 @@ class JsonValue(valueType: Byte?, value: String?) {
             return JsonValue(JsonValueType.String.value, value)
         }
 
-        fun createNumber(value: Long): JsonValue {
+        fun createNumber(value: Double): JsonValue {
             return JsonValue(JsonValueType.Number.value, value.toString())
         }
 

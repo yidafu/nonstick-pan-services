@@ -5,11 +5,11 @@ import dev.yidafu.pan.common.exception.component.ComponentCreateFailException
 import dev.yidafu.pan.common.exception.component.NonexistentComponentException
 import dev.yidafu.pan.common.json.JsonUtils
 import dev.yidafu.pan.common.json.JsonValue
+import dev.yidafu.pan.common.model.dto.SaveComponentDTO
+import dev.yidafu.pan.common.model.dto.UpdateComponentDTO
 import dev.yidafu.pan.common.model.vo.ComponentVO
 import dev.yidafu.pan.component.convertor.ComponentAttributeConvertor
 import dev.yidafu.pan.component.convertor.ComponentConvertor
-import dev.yidafu.pan.component.domain.dto.SaveComponentDTO
-import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO
 import dev.yidafu.pan.component.domain.mapper.*
 import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.component
 import dev.yidafu.pan.component.domain.model.Component
@@ -42,16 +42,16 @@ class ComponentServiceImpl : ComponentService {
         }
         return  comp?.let { it ->
             val vo = convertor?.to(it)
-            val attrMap = componentAttributeService?.findAllByOwner(id);
-            val attrObj = attrMap?.let { it1 -> JsonUtils.parseMap(it1) };
+            val attrMap = componentAttributeService?.findAllByOwner(id)
+            val attrObj = attrMap?.let { it1 -> JsonUtils.parseMap(it1) }
             attrObj?.let {
                 it2 ->
-                vo?.styleConfig = it2.get("styleConfig") as ObjectNode? ?: JsonUtils.createObject();
-                vo?.requestConfig = it2.get("requestConfig") as ObjectNode? ?: JsonUtils.createObject();
-                vo?.styleLabelConfig = it2.get("styleLabelConfig") as ObjectNode? ?: JsonUtils.createObject();
-                vo?.interactConfig = it2.get("interactConfig") as ObjectNode? ?: JsonUtils.createObject();
+                vo?.styleConfig = it2.get("styleConfig") ?: JsonUtils.createObject()
+                vo?.requestConfig = it2.get("requestConfig") ?: JsonUtils.createObject()
+                vo?.styleLabelConfig = it2.get("styleLabelConfig") ?: JsonUtils.createArray()
+                vo?.interactConfig = it2.get("interactConfig") ?: JsonUtils.createObject()
             }
-            vo;
+            vo
         } ?: throw NonexistentComponentException()
 
     }
@@ -81,13 +81,22 @@ class ComponentServiceImpl : ComponentService {
         val component: Component = convertor!!.from(dto)
 
         component.id = id
-        mapper?.updateByPrimaryKey(component)
-        val root = JsonUtils.createObject();
-        root.put("styleConfig", dto.styleConfig);
-        root.put("requestConfig", dto.requestConfig);
-        root.put("styleLabelConfig", dto.styleLabelConfig);
-        root.put("interactConfig", dto.interactConfig);
-        updateComponentAttribute(id, root);
+        mapper?.updateByPrimaryKeySelective(component)
+        val root = JsonUtils.createObject()
+        if (dto.styleConfig?.isEmpty == false) {
+            root.replace("styleConfig", dto.styleConfig)
+        }
+        if (dto.requestConfig?.isEmpty == false) {
+            root.replace("requestConfig", dto.requestConfig)
+        }
+        if (dto.styleLabelConfig?.isEmpty == false) {
+            root.replace("styleLabelConfig", dto.styleLabelConfig)
+        }
+        if (dto.interactConfig?.isEmpty == false) {
+            root.replace("interactConfig", dto.interactConfig)
+        }
+
+        updateComponentAttribute(id, root)
         return findById(id)
     }
 
@@ -97,10 +106,10 @@ class ComponentServiceImpl : ComponentService {
 
         return component.id?.let {
             val root = JsonUtils.createObject();
-            root.put("styleConfig", dto.styleConfig);
-            root.put("requestConfig", dto.requestConfig);
-            root.put("styleLabelConfig", dto.styleLabelConfig);
-            root.put("interactConfig", dto.interactConfig);
+            root.replace("styleConfig", dto.styleConfig);
+            root.replace("requestConfig", dto.requestConfig);
+            root.replace("styleLabelConfig", dto.styleLabelConfig);
+            root.replace("interactConfig", dto.interactConfig);
             updateComponentAttribute(it, root);
             findById(it);
         } ?: throw ComponentCreateFailException()
@@ -120,9 +129,12 @@ class ComponentServiceImpl : ComponentService {
         return lastAttrs?.let {
             JsonUtils.parseMap(it)
         }
-            ?: JsonUtils.createObject();
+            ?: JsonUtils.createObject()
     }
 
+    /**
+     * TODO: 删除属性
+     */
     private fun diffAttrMap(oldMap: Map<String, JsonValue>, newMap:  Map<String, JsonValue>): Map<String, Map<String, JsonValue>> {
         val updateMap = mutableMapOf<String, JsonValue>();
         val removeMap = mutableMapOf<String, JsonValue>();
@@ -148,7 +160,7 @@ class ComponentServiceImpl : ComponentService {
         return mapOf<String, Map<String, JsonValue>> (
             "update" to updateMap,
             "create" to createMap,
-            "remove" to removeMap
+//            "remove" to removeMap
         );
     }
 }

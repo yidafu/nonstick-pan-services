@@ -1,3 +1,3 @@
-package dev.yidafu.pan.component.domain.dto
+package dev.yidafu.pan.common.model.dto
 
 class UpdateComponentDTO : BaseComponentDTO()

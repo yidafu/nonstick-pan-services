@@ -16,6 +16,9 @@ object JsonUtils {
         return objectMapper.createObjectNode();
     }
 
+    fun createArray(): ArrayNode {
+        return objectMapper.createArrayNode();
+    }
     @Throws(JsonProcessingException::class)
     fun object2String(node: ObjectNode?): String {
         return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(node)
@@ -77,7 +80,6 @@ object JsonUtils {
                 } else {
                     objectMapper.createObjectNode();
                 }
-
                 (node as ArrayNode).insert(index, childNode)
                 setPropertyValue(childNode, subPaths, value)
             }
@@ -140,7 +142,10 @@ object JsonUtils {
     }
 
     private fun <T : JsonNode?> tree2Map(node: T, prop: String, map: MutableMap<String, JsonValue>) {
-        if (node!!.isObject) {
+        if (node == null) {
+            return
+        }
+        if (node.isObject) {
             val entries = node.fields()
             while (entries.hasNext()) {
                 val (key, value) = entries.next()
@@ -156,12 +161,11 @@ object JsonUtils {
             }
         } else if (node.isValueNode) {
             val propWithoutDot = prop.substring(1)
-            if (node.isNumber) {
-                map[propWithoutDot] = JsonValue.Companion.createNumber(node.longValue())
-            } else if (node.isBoolean) {
-                map[propWithoutDot] = JsonValue.Companion.createBoolean(node.booleanValue())
-            } else {
-                map[propWithoutDot] = JsonValue.Companion.createString(node.textValue())
+            map[propWithoutDot] = when {
+                node.isNumber ->  JsonValue.Companion.createNumber(node.doubleValue())
+                node.isBoolean -> JsonValue.Companion.createBoolean(node.booleanValue())
+                node.isTextual -> JsonValue.Companion.createString(node.textValue())
+                else -> JsonValue.Companion.createString("")
             }
         }
     }

@@ -1,7 +1,7 @@
 package dev.yidafu.pan.component.service
 
-import dev.yidafu.pan.component.domain.dto.SaveComponentDTO
-import dev.yidafu.pan.component.domain.dto.UpdateComponentDTO
+import dev.yidafu.pan.common.model.dto.SaveComponentDTO
+import dev.yidafu.pan.common.model.dto.UpdateComponentDTO
 import dev.yidafu.pan.common.model.vo.ComponentVO
 
 interface ComponentService {
