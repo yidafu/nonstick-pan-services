@@ -1,6 +1,5 @@
 package dev.yidafu.pan.common.exception
 
-
 open class ServiceException : RuntimeException {
     var code: Int
     override var message: String?

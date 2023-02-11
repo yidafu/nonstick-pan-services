@@ -13,11 +13,11 @@ object JsonUtils {
     private val objectMapper = ObjectMapper()
 
     fun createObject(): ObjectNode {
-        return objectMapper.createObjectNode();
+        return objectMapper.createObjectNode()
     }
 
     fun createArray(): ArrayNode {
-        return objectMapper.createArrayNode();
+        return objectMapper.createArrayNode()
     }
     @Throws(JsonProcessingException::class)
     fun object2String(node: ObjectNode?): String {
@@ -76,9 +76,9 @@ object JsonUtils {
                 setPropertyValue(childNode, subPaths, value)
             } else {
                 val childNode = if (subPaths[0].startsWith(("["))) {
-                    objectMapper.createArrayNode();
+                    objectMapper.createArrayNode()
                 } else {
-                    objectMapper.createObjectNode();
+                    objectMapper.createObjectNode()
                 }
                 (node as ArrayNode).insert(index, childNode)
                 setPropertyValue(childNode, subPaths, value)
@@ -88,7 +88,7 @@ object JsonUtils {
                 val childNode = node[path]
                 setPropertyValue(childNode, subPaths, value)
             } else {
-                val childNode =  if (subPaths[0].startsWith("[")) {
+                val childNode = if (subPaths[0].startsWith("[")) {
                     objectMapper.createArrayNode()
                 } else {
                     objectMapper.createObjectNode()
@@ -162,7 +162,7 @@ object JsonUtils {
         } else if (node.isValueNode) {
             val propWithoutDot = prop.substring(1)
             map[propWithoutDot] = when {
-                node.isNumber ->  JsonValue.Companion.createNumber(node.doubleValue())
+                node.isNumber -> JsonValue.Companion.createNumber(node.doubleValue())
                 node.isBoolean -> JsonValue.Companion.createBoolean(node.booleanValue())
                 node.isTextual -> JsonValue.Companion.createString(node.textValue())
                 else -> JsonValue.Companion.createString("")

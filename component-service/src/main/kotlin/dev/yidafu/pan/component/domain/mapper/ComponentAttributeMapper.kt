@@ -40,27 +40,30 @@ import org.mybatis.dynamic.sql.util.mybatis3.CommonUpdateMapper
 
 @Mapper
 interface ComponentAttributeMapper : CommonCountMapper, CommonDeleteMapper, CommonUpdateMapper {
-    @InsertProvider(type=SqlProviderAdapter::class, method="insert")
-    @Options(useGeneratedKeys=true,keyProperty="row.id")
+    @InsertProvider(type = SqlProviderAdapter::class, method = "insert")
+    @Options(useGeneratedKeys = true, keyProperty = "row.id")
     fun insert(insertStatement: InsertStatementProvider<ComponentAttribute>): Int
 
     @InsertProvider(type = SqlProviderAdapter::class, method = "insertMultipleWithGeneratedKeys")
-    @Options(useGeneratedKeys=true,keyProperty="records.id")
+    @Options(useGeneratedKeys = true, keyProperty = "records.id")
     fun insertMultiple(@Param("insertStatement") insertStatement: String, @Param("records") records: List<ComponentAttribute>): Int
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
-    @Results(id="ComponentAttributeResult", value = [
-        Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        Result(column="owner_id", property="ownerId", jdbcType=JdbcType.BIGINT),
-        Result(column="attr", property="attr", jdbcType=JdbcType.VARCHAR),
-        Result(column="value_type", property="valueType", jdbcType=JdbcType.TINYINT),
-        Result(column="value", property="value", jdbcType=JdbcType.VARCHAR),
-        Result(column="created_at", property="createdAt", jdbcType=JdbcType.TIMESTAMP),
-        Result(column="updated_at", property="updatedAt", jdbcType=JdbcType.TIMESTAMP)
-    ])
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
+    @Results(
+        id = "ComponentAttributeResult",
+        value = [
+            Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true),
+            Result(column = "owner_id", property = "ownerId", jdbcType = JdbcType.BIGINT),
+            Result(column = "attr", property = "attr", jdbcType = JdbcType.VARCHAR),
+            Result(column = "value_type", property = "valueType", jdbcType = JdbcType.TINYINT),
+            Result(column = "value", property = "value", jdbcType = JdbcType.VARCHAR),
+            Result(column = "created_at", property = "createdAt", jdbcType = JdbcType.TIMESTAMP),
+            Result(column = "updated_at", property = "updatedAt", jdbcType = JdbcType.TIMESTAMP)
+        ]
+    )
     fun selectMany(selectStatement: SelectStatementProvider): List<ComponentAttribute>
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
     @ResultMap("ComponentAttributeResult")
     fun selectOne(selectStatement: SelectStatementProvider): ComponentAttribute?
 }

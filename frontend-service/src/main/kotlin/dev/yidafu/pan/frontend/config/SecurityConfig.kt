@@ -11,6 +11,6 @@ class SecurityConfig : WebMvcConfigurationSupport() {
             .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
             .allowedOrigins("*")
             .allowedHeaders("*")
-            .allowCredentials(false);
+            .allowCredentials(false)
     }
 }

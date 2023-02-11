@@ -1,26 +1,26 @@
 package dev.yidafu.pan.common.model.dto
 
 import com.fasterxml.jackson.databind.JsonNode
+import java.io.Serializable
 
-
-open class BaseComponentDTO {
-    val screenId: Long? = null
-    val groupId: Long? = null
-    val name: String? = null
-    val layerName: String? = null
-    val isGroup: Byte? = null
-    val width: Int? = null
-    val height: Int? = null
-    val offsetX: Int? = null
-    val offsetY: Int? = null
-    val zIndex: Int? = null
-    val isLock: Byte? = null
-    val isLockAspectRatio: Byte? = null
-    val category: String? = null
-    val subCategory: String? = null
-    val umdJsUrl: String? = null
-    val styleLabelConfig: JsonNode? =null
-    val styleConfig: JsonNode? = null
-    val requestConfig: JsonNode? = null
-    val interactConfig: JsonNode? = null
+open class BaseComponentDTO : Serializable {
+    var screenId: Long? = null
+    var groupId: Long? = null
+    var name: String? = null
+    var layerName: String? = null
+    var isGroup: Byte? = null
+    var width: Int? = null
+    var height: Int? = null
+    var offsetX: Int? = null
+    var offsetY: Int? = null
+    var zIndex: Int? = null
+    var isLock: Byte? = null
+    var isLockAspectRatio: Byte? = null
+    var category: String? = null
+    var subCategory: String? = null
+    var umdJsUrl: String? = null
+    var styleLabelConfig: JsonNode? = null
+    var styleConfig: JsonNode? = null
+    var requestConfig: JsonNode? = null
+    var interactConfig: JsonNode? = null
 }

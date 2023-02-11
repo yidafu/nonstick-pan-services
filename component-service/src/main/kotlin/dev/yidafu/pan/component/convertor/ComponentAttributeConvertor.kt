@@ -7,10 +7,10 @@ import dev.yidafu.pan.component.domain.model.ComponentAttribute
 import org.mapstruct.InjectionStrategy
 import org.mapstruct.Mapper
 
-@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR )
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 interface ComponentAttributeConvertor {
 
-    fun from(list: List<SaveComponentAttributeDTO>): List<ComponentAttribute>;
+    fun from(list: List<SaveComponentAttributeDTO>): List<ComponentAttribute>
 
     fun from(list: SaveComponentAttributeDTO): ComponentAttribute
 

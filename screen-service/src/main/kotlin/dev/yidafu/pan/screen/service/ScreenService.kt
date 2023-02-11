@@ -11,7 +11,6 @@ interface ScreenService {
 
     fun getOneById(screenId: Long): ScreenVO
 
-
     fun updateScreen(dto: UpdateScreenDTO): ScreenVO
 
     fun removeById(screenId: Long): Boolean

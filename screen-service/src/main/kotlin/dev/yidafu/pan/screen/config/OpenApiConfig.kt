@@ -12,7 +12,8 @@ class OpenApiConfig {
             .components(Components())
             .info(
                 Info()
-                .title("大屏服务")
-                .description("大屏相关接口"))
+                    .title("大屏服务")
+                    .description("大屏相关接口")
+            )
     }
 }

@@ -6,7 +6,6 @@ import dev.yidafu.pan.frontend.client.fallback.ComponentClientFallback
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.web.bind.annotation.*
 
-
 @FeignClient("PanComponentService", fallback = ComponentClientFallback::class)
 interface ComponentClient {
     @GetMapping("/components")

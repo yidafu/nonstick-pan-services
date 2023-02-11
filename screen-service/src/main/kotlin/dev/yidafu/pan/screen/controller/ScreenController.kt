@@ -13,24 +13,22 @@ import org.springframework.web.bind.annotation.*
 class ScreenController {
 
     @Autowired
-    var screenService: ScreenService? = null;
-
+    var screenService: ScreenService? = null
 
     @GetMapping("/screen/{screenId}")
     fun getScreenById(@PathVariable("screenId") screenId: Long): ScreenVO {
         return screenService!!.getOneById(screenId)
     }
 
-
     @PutMapping("/screen/{screenId}")
     fun updateScreenById(@PathVariable("screenId") screenId: Long, @RequestBody updateDto: UpdateScreenDTO): ScreenVO {
-        updateDto.id = screenId;
+        updateDto.id = screenId
         return screenService!!.updateScreen(updateDto)
     }
 
     @DeleteMapping("/screen/{screenId}")
     fun removeScreenById(@PathVariable("screenId") screenId: Long): Boolean {
-        return screenService!!.removeById(screenId);
+        return screenService!!.removeById(screenId)
     }
 
     @PostMapping("/screen")

@@ -2,7 +2,7 @@ package dev.yidafu.pan.common.exception
 
 import dev.yidafu.kotlin.api.common.IErrorCode
 
-enum class ExceptionCode(override var code: Int, override var message: String): IErrorCode {
+enum class ExceptionCode(override var code: Int, override var message: String) : IErrorCode {
     UnknownJsonValueType(100100111, "不支持的JSON基础数据类型"),
     IllegalComponentAttributeOwner(
         2001001000,
@@ -11,6 +11,7 @@ enum class ExceptionCode(override var code: Int, override var message: String): 
 
     NonexistentComponent(100200111, "组件不存在"),
     ComponentCreateFail(100200112, "组件创建失败"),
+    MissingNameParameter(100200113, "缺失组件名"),
 
     NonexistentComponentAttribute(100300111, "组件属性不存在"),
     CreateComponentAttributeFail(100300112, "创建组件属性失败"),

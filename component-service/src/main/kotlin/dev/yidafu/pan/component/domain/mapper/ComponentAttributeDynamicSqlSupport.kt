@@ -1,9 +1,9 @@
 package dev.yidafu.pan.component.domain.mapper
 
-import java.sql.JDBCType
-import java.util.Date
 import org.mybatis.dynamic.sql.AliasableSqlTable
 import org.mybatis.dynamic.sql.util.kotlin.elements.column
+import java.sql.JDBCType
+import java.util.Date
 
 object ComponentAttributeDynamicSqlSupport {
     val componentAttribute = ComponentAttribute()
@@ -22,9 +22,7 @@ object ComponentAttributeDynamicSqlSupport {
 
     val updatedAt = componentAttribute.updatedAt
 
-    class ComponentAttribute : AliasableSqlTable<ComponentAttribute>("vs_component_attribute",
-        ComponentAttributeDynamicSqlSupport::ComponentAttribute
-    ) {
+    class ComponentAttribute : AliasableSqlTable<ComponentAttribute>("vs_component_attribute", ::ComponentAttribute) {
         val id = column<Long>(name = "id", jdbcType = JDBCType.BIGINT)
 
         val ownerId = column<Long>(name = "owner_id", jdbcType = JDBCType.BIGINT)

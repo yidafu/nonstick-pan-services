@@ -5,48 +5,46 @@ import org.mybatis.dynamic.sql.util.kotlin.elements.column
 import java.sql.JDBCType
 import java.util.Date
 
-object ComponentDynamicSqlSupport {
-    val component = Component()
+object ComponentTemplateDynamicSqlSupport {
+    val componentTemplate = ComponentTemplate()
 
-    val id = component.id
+    val id = componentTemplate.id
 
-    val screenId = component.screenId
+    val screenId = componentTemplate.screenId
 
-    val groupId = component.groupId
+    val groupId = componentTemplate.groupId
 
-    val name = component.name
+    val name = componentTemplate.name
 
-    val layerName = component.layerName
+    val layerName = componentTemplate.layerName
 
-    val isGroup = component.isGroup
+    val isGroup = componentTemplate.isGroup
 
-    val isTemplate = component.isTemplate
+    val width = componentTemplate.width
 
-    val width = component.width
+    val height = componentTemplate.height
 
-    val height = component.height
+    val offsetX = componentTemplate.offsetX
 
-    val offsetX = component.offsetX
+    val offsetY = componentTemplate.offsetY
 
-    val offsetY = component.offsetY
+    val zIndex = componentTemplate.zIndex
 
-    val zIndex = component.zIndex
+    val isLock = componentTemplate.isLock
 
-    val isLock = component.isLock
+    val isLockAspectRatio = componentTemplate.isLockAspectRatio
 
-    val isLockAspectRatio = component.isLockAspectRatio
+    val category = componentTemplate.category
 
-    val category = component.category
+    val subCategory = componentTemplate.subCategory
 
-    val subCategory = component.subCategory
+    val umdJsUrl = componentTemplate.umdJsUrl
 
-    val umdJsUrl = component.umdJsUrl
+    val createdAt = componentTemplate.createdAt
 
-    val createdAt = component.createdAt
+    val updatedAt = componentTemplate.updatedAt
 
-    val updatedAt = component.updatedAt
-
-    class Component : AliasableSqlTable<Component>("vs_component", ::Component) {
+    class ComponentTemplate : AliasableSqlTable<ComponentTemplate>("vs_component_template", ::ComponentTemplate) {
         val id = column<Long>(name = "id", jdbcType = JDBCType.BIGINT)
 
         val screenId = column<Long>(name = "screen_id", jdbcType = JDBCType.BIGINT)
@@ -58,8 +56,6 @@ object ComponentDynamicSqlSupport {
         val layerName = column<String>(name = "layer_name", jdbcType = JDBCType.VARCHAR)
 
         val isGroup = column<Byte>(name = "is_group", jdbcType = JDBCType.TINYINT)
-
-        val isTemplate = column<Byte>(name = "is_template", jdbcType = JDBCType.TINYINT)
 
         val width = column<Int>(name = "width", jdbcType = JDBCType.INTEGER)
 

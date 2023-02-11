@@ -17,7 +17,7 @@ class JsonValue(valueType: Byte?, value: String?) {
             throw UnknownJsonValueTypeException()
         }
         if (null == value) {
-            this.valueType = JsonValueType.Null;
+            this.valueType = JsonValueType.Null
             this.value = "null"
         } else {
             this.value = value

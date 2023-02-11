@@ -2,7 +2,7 @@ package dev.yidafu.pan.screen.domain.dto
 
 import java.io.Serializable
 
-class UpdateScreenDTO: Serializable {
+class UpdateScreenDTO : Serializable {
     var id: Long? = null
     var name: String? = null
     var width: Int? = null

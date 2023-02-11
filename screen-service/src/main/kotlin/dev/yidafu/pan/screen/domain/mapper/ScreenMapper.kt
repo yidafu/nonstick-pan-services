@@ -45,32 +45,35 @@ import org.mybatis.dynamic.sql.util.mybatis3.CommonUpdateMapper
 
 @Mapper
 interface ScreenMapper : CommonCountMapper, CommonDeleteMapper, CommonUpdateMapper {
-    @InsertProvider(type=SqlProviderAdapter::class, method="insert")
-    @Options(useGeneratedKeys=true,keyProperty="row.id")
+    @InsertProvider(type = SqlProviderAdapter::class, method = "insert")
+    @Options(useGeneratedKeys = true, keyProperty = "row.id")
     fun insert(insertStatement: InsertStatementProvider<Screen>): Int
 
     @InsertProvider(type = SqlProviderAdapter::class, method = "insertMultipleWithGeneratedKeys")
-    @Options(useGeneratedKeys=true,keyProperty="records.id")
+    @Options(useGeneratedKeys = true, keyProperty = "records.id")
     fun insertMultiple(@Param("insertStatement") insertStatement: String, @Param("records") records: List<Screen>): Int
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
-    @Results(id="ScreenResult", value = [
-        Result(column="id", property="id", jdbcType=JdbcType.BIGINT, id=true),
-        Result(column="name", property="name", jdbcType=JdbcType.VARCHAR),
-        Result(column="width", property="width", jdbcType=JdbcType.INTEGER),
-        Result(column="height", property="height", jdbcType=JdbcType.INTEGER),
-        Result(column="background_color", property="backgroundColor", jdbcType=JdbcType.VARCHAR),
-        Result(column="background_image", property="backgroundImage", jdbcType=JdbcType.VARCHAR),
-        Result(column="snapshot_url", property="snapshotUrl", jdbcType=JdbcType.VARCHAR),
-        Result(column="fill_type", property="fillType", jdbcType=JdbcType.TINYINT),
-        Result(column="is_published", property="isPublished", jdbcType=JdbcType.TINYINT),
-        Result(column="is_template", property="isTemplate", jdbcType=JdbcType.TINYINT),
-        Result(column="created_at", property="createdAt", jdbcType=JdbcType.TIMESTAMP),
-        Result(column="updated_at", property="updatedAt", jdbcType=JdbcType.TIMESTAMP)
-    ])
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
+    @Results(
+        id = "ScreenResult",
+        value = [
+            Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true),
+            Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
+            Result(column = "width", property = "width", jdbcType = JdbcType.INTEGER),
+            Result(column = "height", property = "height", jdbcType = JdbcType.INTEGER),
+            Result(column = "background_color", property = "backgroundColor", jdbcType = JdbcType.VARCHAR),
+            Result(column = "background_image", property = "backgroundImage", jdbcType = JdbcType.VARCHAR),
+            Result(column = "snapshot_url", property = "snapshotUrl", jdbcType = JdbcType.VARCHAR),
+            Result(column = "fill_type", property = "fillType", jdbcType = JdbcType.TINYINT),
+            Result(column = "is_published", property = "isPublished", jdbcType = JdbcType.TINYINT),
+            Result(column = "is_template", property = "isTemplate", jdbcType = JdbcType.TINYINT),
+            Result(column = "created_at", property = "createdAt", jdbcType = JdbcType.TIMESTAMP),
+            Result(column = "updated_at", property = "updatedAt", jdbcType = JdbcType.TIMESTAMP)
+        ]
+    )
     fun selectMany(selectStatement: SelectStatementProvider): List<Screen>
 
-    @SelectProvider(type=SqlProviderAdapter::class, method="select")
+    @SelectProvider(type = SqlProviderAdapter::class, method = "select")
     @ResultMap("ScreenResult")
     fun selectOne(selectStatement: SelectStatementProvider): Screen?
 }

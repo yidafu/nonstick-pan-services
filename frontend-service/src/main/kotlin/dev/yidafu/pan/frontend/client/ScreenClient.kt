@@ -1,6 +1,5 @@
 package dev.yidafu.pan.frontend.client
 
-
 import dev.yidafu.pan.common.model.vo.PageVO
 import dev.yidafu.pan.common.model.vo.ScreenVO
 import dev.yidafu.pan.frontend.client.fallback.ScreenClientFallback

@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*
 @RestController
 class ScreenController {
     @Autowired
-    var screenClient: ScreenClient? = null;
+    var screenClient: ScreenClient? = null
 
     @Autowired
-    lateinit var componentClient: ComponentClient;
+    lateinit var componentClient: ComponentClient
 
     @GetMapping("/screens")
     fun getAllScreen(): Response<List<ScreenVO>> {

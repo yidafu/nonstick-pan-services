@@ -7,4 +7,4 @@ class PageVO<T>(
     var page: Long = 1,
     var size: Long = -1,
     var total: Long,
-): Serializable {}
+) : Serializable

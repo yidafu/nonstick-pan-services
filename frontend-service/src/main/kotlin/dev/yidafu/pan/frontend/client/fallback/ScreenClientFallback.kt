@@ -4,7 +4,7 @@ import dev.yidafu.pan.common.model.vo.PageVO
 import dev.yidafu.pan.common.model.vo.ScreenVO
 import dev.yidafu.pan.frontend.client.ScreenClient
 
-class ScreenClientFallback: ScreenClient {
+class ScreenClientFallback : ScreenClient {
     override fun getAll(): PageVO<List<ScreenVO>> {
         TODO("Not yet implemented")
     }

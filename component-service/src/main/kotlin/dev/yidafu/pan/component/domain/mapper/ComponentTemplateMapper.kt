@@ -1,26 +1,25 @@
 package dev.yidafu.pan.component.domain.mapper
 
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.category
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.component
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.createdAt
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.groupId
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.height
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.id
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.isGroup
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.isLock
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.isLockAspectRatio
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.isTemplate
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.layerName
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.name
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.offsetX
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.offsetY
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.screenId
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.subCategory
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.umdJsUrl
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.updatedAt
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.width
-import dev.yidafu.pan.component.domain.mapper.ComponentDynamicSqlSupport.zIndex
-import dev.yidafu.pan.component.domain.model.Component
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.category
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.componentTemplate
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.createdAt
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.groupId
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.height
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.id
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.isGroup
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.isLock
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.isLockAspectRatio
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.layerName
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.name
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.offsetX
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.offsetY
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.screenId
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.subCategory
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.umdJsUrl
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.updatedAt
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.width
+import dev.yidafu.pan.component.domain.mapper.ComponentTemplateDynamicSqlSupport.zIndex
+import dev.yidafu.pan.component.domain.model.ComponentTemplate
 import org.apache.ibatis.annotations.InsertProvider
 import org.apache.ibatis.annotations.Mapper
 import org.apache.ibatis.annotations.Options
@@ -51,18 +50,18 @@ import org.mybatis.dynamic.sql.util.mybatis3.CommonDeleteMapper
 import org.mybatis.dynamic.sql.util.mybatis3.CommonUpdateMapper
 
 @Mapper
-interface ComponentMapper : CommonCountMapper, CommonDeleteMapper, CommonUpdateMapper {
+interface ComponentTemplateMapper : CommonCountMapper, CommonDeleteMapper, CommonUpdateMapper {
     @InsertProvider(type = SqlProviderAdapter::class, method = "insert")
     @Options(useGeneratedKeys = true, keyProperty = "row.id")
-    fun insert(insertStatement: InsertStatementProvider<Component>): Int
+    fun insert(insertStatement: InsertStatementProvider<ComponentTemplate>): Int
 
     @InsertProvider(type = SqlProviderAdapter::class, method = "insertMultipleWithGeneratedKeys")
     @Options(useGeneratedKeys = true, keyProperty = "records.id")
-    fun insertMultiple(@Param("insertStatement") insertStatement: String, @Param("records") records: List<Component>): Int
+    fun insertMultiple(@Param("insertStatement") insertStatement: String, @Param("records") records: List<ComponentTemplate>): Int
 
     @SelectProvider(type = SqlProviderAdapter::class, method = "select")
     @Results(
-        id = "ComponentResult",
+        id = "ComponentTemplateResult",
         value = [
             Result(column = "id", property = "id", jdbcType = JdbcType.BIGINT, id = true),
             Result(column = "screen_id", property = "screenId", jdbcType = JdbcType.BIGINT),
@@ -70,7 +69,6 @@ interface ComponentMapper : CommonCountMapper, CommonDeleteMapper, CommonUpdateM
             Result(column = "name", property = "name", jdbcType = JdbcType.VARCHAR),
             Result(column = "layer_name", property = "layerName", jdbcType = JdbcType.VARCHAR),
             Result(column = "is_group", property = "isGroup", jdbcType = JdbcType.TINYINT),
-            Result(column = "is_template", property = "isTemplate", jdbcType = JdbcType.TINYINT),
             Result(column = "width", property = "width", jdbcType = JdbcType.INTEGER),
             Result(column = "height", property = "height", jdbcType = JdbcType.INTEGER),
             Result(column = "offset_x", property = "offsetX", jdbcType = JdbcType.INTEGER),
@@ -85,32 +83,31 @@ interface ComponentMapper : CommonCountMapper, CommonDeleteMapper, CommonUpdateM
             Result(column = "updated_at", property = "updatedAt", jdbcType = JdbcType.TIMESTAMP)
         ]
     )
-    fun selectMany(selectStatement: SelectStatementProvider): List<Component>
+    fun selectMany(selectStatement: SelectStatementProvider): List<ComponentTemplate>
 
     @SelectProvider(type = SqlProviderAdapter::class, method = "select")
-    @ResultMap("ComponentResult")
-    fun selectOne(selectStatement: SelectStatementProvider): Component?
+    @ResultMap("ComponentTemplateResult")
+    fun selectOne(selectStatement: SelectStatementProvider): ComponentTemplate?
 }
 
-fun ComponentMapper.count(completer: CountCompleter) =
-    countFrom(this::count, component, completer)
+fun ComponentTemplateMapper.count(completer: CountCompleter) =
+    countFrom(this::count, componentTemplate, completer)
 
-fun ComponentMapper.delete(completer: DeleteCompleter) =
-    deleteFrom(this::delete, component, completer)
+fun ComponentTemplateMapper.delete(completer: DeleteCompleter) =
+    deleteFrom(this::delete, componentTemplate, completer)
 
-fun ComponentMapper.deleteByPrimaryKey(id_: Long) =
+fun ComponentTemplateMapper.deleteByPrimaryKey(id_: Long) =
     delete {
         where { id isEqualTo id_ }
     }
 
-fun ComponentMapper.insert(row: Component) =
-    insert(this::insert, row, component) {
+fun ComponentTemplateMapper.insert(row: ComponentTemplate) =
+    insert(this::insert, row, componentTemplate) {
         map(screenId) toProperty "screenId"
         map(groupId) toProperty "groupId"
         map(name) toProperty "name"
         map(layerName) toProperty "layerName"
         map(isGroup) toProperty "isGroup"
-        map(isTemplate) toProperty "isTemplate"
         map(width) toProperty "width"
         map(height) toProperty "height"
         map(offsetX) toProperty "offsetX"
@@ -125,14 +122,13 @@ fun ComponentMapper.insert(row: Component) =
         map(updatedAt) toProperty "updatedAt"
     }
 
-fun ComponentMapper.insertMultiple(records: Collection<Component>) =
-    insertMultipleWithGeneratedKeys(this::insertMultiple, records, component) {
+fun ComponentTemplateMapper.insertMultiple(records: Collection<ComponentTemplate>) =
+    insertMultipleWithGeneratedKeys(this::insertMultiple, records, componentTemplate) {
         map(screenId) toProperty "screenId"
         map(groupId) toProperty "groupId"
         map(name) toProperty "name"
         map(layerName) toProperty "layerName"
         map(isGroup) toProperty "isGroup"
-        map(isTemplate) toProperty "isTemplate"
         map(width) toProperty "width"
         map(height) toProperty "height"
         map(offsetX) toProperty "offsetX"
@@ -147,17 +143,16 @@ fun ComponentMapper.insertMultiple(records: Collection<Component>) =
         map(updatedAt) toProperty "updatedAt"
     }
 
-fun ComponentMapper.insertMultiple(vararg records: Component) =
+fun ComponentTemplateMapper.insertMultiple(vararg records: ComponentTemplate) =
     insertMultiple(records.toList())
 
-fun ComponentMapper.insertSelective(row: Component) =
-    insert(this::insert, row, component) {
+fun ComponentTemplateMapper.insertSelective(row: ComponentTemplate) =
+    insert(this::insert, row, componentTemplate) {
         map(screenId).toPropertyWhenPresent("screenId", row::screenId)
         map(groupId).toPropertyWhenPresent("groupId", row::groupId)
         map(name).toPropertyWhenPresent("name", row::name)
         map(layerName).toPropertyWhenPresent("layerName", row::layerName)
         map(isGroup).toPropertyWhenPresent("isGroup", row::isGroup)
-        map(isTemplate).toPropertyWhenPresent("isTemplate", row::isTemplate)
         map(width).toPropertyWhenPresent("width", row::width)
         map(height).toPropertyWhenPresent("height", row::height)
         map(offsetX).toPropertyWhenPresent("offsetX", row::offsetX)
@@ -172,33 +167,32 @@ fun ComponentMapper.insertSelective(row: Component) =
         map(updatedAt).toPropertyWhenPresent("updatedAt", row::updatedAt)
     }
 
-private val columnList = listOf(id, screenId, groupId, name, layerName, isGroup, isTemplate, width, height, offsetX, offsetY, zIndex, isLock, isLockAspectRatio, category, subCategory, umdJsUrl, createdAt, updatedAt)
+private val columnList = listOf(id, screenId, groupId, name, layerName, isGroup, width, height, offsetX, offsetY, zIndex, isLock, isLockAspectRatio, category, subCategory, umdJsUrl, createdAt, updatedAt)
 
-fun ComponentMapper.selectOne(completer: SelectCompleter) =
-    selectOne(this::selectOne, columnList, component, completer)
+fun ComponentTemplateMapper.selectOne(completer: SelectCompleter) =
+    selectOne(this::selectOne, columnList, componentTemplate, completer)
 
-fun ComponentMapper.select(completer: SelectCompleter) =
-    selectList(this::selectMany, columnList, component, completer)
+fun ComponentTemplateMapper.select(completer: SelectCompleter) =
+    selectList(this::selectMany, columnList, componentTemplate, completer)
 
-fun ComponentMapper.selectDistinct(completer: SelectCompleter) =
-    selectDistinct(this::selectMany, columnList, component, completer)
+fun ComponentTemplateMapper.selectDistinct(completer: SelectCompleter) =
+    selectDistinct(this::selectMany, columnList, componentTemplate, completer)
 
-fun ComponentMapper.selectByPrimaryKey(id_: Long) =
+fun ComponentTemplateMapper.selectByPrimaryKey(id_: Long) =
     selectOne {
         where { id isEqualTo id_ }
     }
 
-fun ComponentMapper.update(completer: UpdateCompleter) =
-    update(this::update, component, completer)
+fun ComponentTemplateMapper.update(completer: UpdateCompleter) =
+    update(this::update, componentTemplate, completer)
 
-fun KotlinUpdateBuilder.updateAllColumns(row: Component) =
+fun KotlinUpdateBuilder.updateAllColumns(row: ComponentTemplate) =
     apply {
         set(screenId) equalToOrNull row::screenId
         set(groupId) equalToOrNull row::groupId
         set(name) equalToOrNull row::name
         set(layerName) equalToOrNull row::layerName
         set(isGroup) equalToOrNull row::isGroup
-        set(isTemplate) equalToOrNull row::isTemplate
         set(width) equalToOrNull row::width
         set(height) equalToOrNull row::height
         set(offsetX) equalToOrNull row::offsetX
@@ -213,14 +207,13 @@ fun KotlinUpdateBuilder.updateAllColumns(row: Component) =
         set(updatedAt) equalToOrNull row::updatedAt
     }
 
-fun KotlinUpdateBuilder.updateSelectiveColumns(row: Component) =
+fun KotlinUpdateBuilder.updateSelectiveColumns(row: ComponentTemplate) =
     apply {
         set(screenId) equalToWhenPresent row::screenId
         set(groupId) equalToWhenPresent row::groupId
         set(name) equalToWhenPresent row::name
         set(layerName) equalToWhenPresent row::layerName
         set(isGroup) equalToWhenPresent row::isGroup
-        set(isTemplate) equalToWhenPresent row::isTemplate
         set(width) equalToWhenPresent row::width
         set(height) equalToWhenPresent row::height
         set(offsetX) equalToWhenPresent row::offsetX
@@ -235,14 +228,13 @@ fun KotlinUpdateBuilder.updateSelectiveColumns(row: Component) =
         set(updatedAt) equalToWhenPresent row::updatedAt
     }
 
-fun ComponentMapper.updateByPrimaryKey(row: Component) =
+fun ComponentTemplateMapper.updateByPrimaryKey(row: ComponentTemplate) =
     update {
         set(screenId) equalToOrNull row::screenId
         set(groupId) equalToOrNull row::groupId
         set(name) equalToOrNull row::name
         set(layerName) equalToOrNull row::layerName
         set(isGroup) equalToOrNull row::isGroup
-        set(isTemplate) equalToOrNull row::isTemplate
         set(width) equalToOrNull row::width
         set(height) equalToOrNull row::height
         set(offsetX) equalToOrNull row::offsetX
@@ -258,14 +250,13 @@ fun ComponentMapper.updateByPrimaryKey(row: Component) =
         where { id isEqualTo row.id!! }
     }
 
-fun ComponentMapper.updateByPrimaryKeySelective(row: Component) =
+fun ComponentTemplateMapper.updateByPrimaryKeySelective(row: ComponentTemplate) =
     update {
         set(screenId) equalToWhenPresent row::screenId
         set(groupId) equalToWhenPresent row::groupId
         set(name) equalToWhenPresent row::name
         set(layerName) equalToWhenPresent row::layerName
         set(isGroup) equalToWhenPresent row::isGroup
-        set(isTemplate) equalToWhenPresent row::isTemplate
         set(width) equalToWhenPresent row::width
         set(height) equalToWhenPresent row::height
         set(offsetX) equalToWhenPresent row::offsetX

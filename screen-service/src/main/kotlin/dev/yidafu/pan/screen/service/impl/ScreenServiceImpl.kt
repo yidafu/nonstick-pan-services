@@ -14,22 +14,21 @@ import dev.yidafu.pan.screen.service.ScreenService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
-
 @Service
 class ScreenServiceImpl : ScreenService {
 
     @Autowired
-    val mapper: ScreenMapper? = null;
+    val mapper: ScreenMapper? = null
 
     @Autowired
-    val convertor: ScreenConvertor? = null;
+    val convertor: ScreenConvertor? = null
 
     override fun createOne(dto: SaveScreenDTO): ScreenVO {
-        val screen = convertor?.from(dto);
+        val screen = convertor?.from(dto)
 
         return screen?.let {
 
-            mapper?.insertSelective(it);
+            mapper?.insertSelective(it)
             screen.id?.let { it1 -> getOneById(it1) }
         } ?: throw CreateScreenFailException()
     }
@@ -44,13 +43,13 @@ class ScreenServiceImpl : ScreenService {
     }
 
     override fun updateScreen(dto: UpdateScreenDTO): ScreenVO {
-        val screen = convertor?.from(dto);
+        val screen = convertor?.from(dto)
 
         screen?.let {
             mapper?.updateByPrimaryKeySelective(screen)
         }
 
-        return screen?.id?.let { getOneById(it) } ?: throw NonexistentScreenException();
+        return screen?.id?.let { getOneById(it) } ?: throw NonexistentScreenException()
     }
 
     override fun removeById(screenId: Long): Boolean {
@@ -66,15 +65,15 @@ class ScreenServiceImpl : ScreenService {
             query.size?.let {
                 val page = (query.page ?: 1)
                 limit(page * it)
-                offset(page -1)
+                offset(page - 1)
             }
         } ?: listOf()
-        val total = mapper?.count {  } ?: 0
+        val total = mapper?.count { } ?: 0
         return PageVO(
             convertor?.to(screenList) ?: listOf(),
             query.page ?: 1,
             query.size ?: -1,
             total,
-            )
+        )
     }
 }

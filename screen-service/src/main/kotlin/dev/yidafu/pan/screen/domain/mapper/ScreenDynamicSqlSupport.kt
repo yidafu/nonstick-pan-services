@@ -1,9 +1,9 @@
 package dev.yidafu.pan.screen.domain.mapper
 
-import java.sql.JDBCType
-import java.util.Date
 import org.mybatis.dynamic.sql.AliasableSqlTable
 import org.mybatis.dynamic.sql.util.kotlin.elements.column
+import java.sql.JDBCType
+import java.util.Date
 
 object ScreenDynamicSqlSupport {
     val screen = Screen()

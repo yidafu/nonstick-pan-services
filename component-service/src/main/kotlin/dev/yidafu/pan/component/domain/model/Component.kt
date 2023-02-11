@@ -10,6 +10,7 @@ data class Component(
     var name: String? = null,
     var layerName: String? = null,
     var isGroup: Byte? = null,
+    var isTemplate: Byte? = null,
     var width: Int? = null,
     var height: Int? = null,
     var offsetX: Int? = null,
