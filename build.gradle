@@ -59,6 +59,7 @@ plugins {
     id "org.jetbrains.kotlin.kapt" version '1.7.22'
     id 'maven-publish'
     id "org.springdoc.openapi-gradle-plugin" version "1.6.0"
+    id "org.jlleitschuh.gradle.ktlint" version "11.1.0"
 }
 
 allprojects {
@@ -120,6 +121,7 @@ subprojects {
     apply plugin: 'org.jetbrains.kotlin.jvm'
     apply plugin: 'org.jetbrains.kotlin.kapt'
     apply plugin: 'org.springdoc.openapi-gradle-plugin'
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
 
     group = 'dev.yidafu.pan'
     version = '0.0.1-SNAPSHOT'

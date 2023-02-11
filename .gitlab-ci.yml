@@ -2,7 +2,7 @@ image: gradle:jdk19
 
 stages:
   - test
-  - visualize
+  - lint
   - build
 
 gradle_test:
@@ -30,6 +30,10 @@ gradle_test:
 #      coverage_report:
 #        coverage_format: cobertura
 #        path: build/cobertura.xml
+ktlint:
+  stage: lint
+  script:
+    - gradle ktlintCheck
 
 gradle_build:
   stage: build
